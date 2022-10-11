@@ -10,7 +10,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   },
   "keywords": [],
   "author": "",
+  "type":"module",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/DsooRadha/CDMX013-md-links/issues"
