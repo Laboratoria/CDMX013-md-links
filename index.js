@@ -1,6 +1,18 @@
-import { CLI, readMyFile } from './helper.js'
+import { CLI } from './helper.js'
 CLI();
-readMyFile();
+import fs from 'fs';
+import pathLib from 'node:path';
+
+const readMyFile = fs.readFileSync("./pruebasMD/prueba.md", 'utf8')
+console.log(readMyFile)
+
+const path = "./pruebasMD"
+const pathAbsolute = '/Users/dsoo/Developer/CDMX013-md-links/pruebasMD'
+
+const checkRoutes = pathLib.isAbsolute(pathAbsolute);
+console.log(checkRoutes);
+const routes = fs.readdirSync(path)
+console.log(routes)
 
 
 
