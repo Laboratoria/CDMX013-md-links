@@ -1,40 +1,27 @@
 import process from 'node:process';
 import fs from 'fs';
+import pathLib from 'node:path';
+
 
 export const CLI = () => {
     console.log(process.argv)
 
 }
-
+const directory = 'Users/dsoo/Developer/CDMX013-md-links/pruebasMD';
+//export const readMyFile = (route,(err,data)) => {
 export const readMyFile = () => {
-     const data = fs.readFileSync("./pruebasMD/prueba.md", 'utf8')
-     //const path = "./pruebasMD/prueba.md";
-     console.log(data)
+    const data = fs.readFileSync("./pruebasMD/prueba.md", 'utf8')
+    console.log(data)
+    // const files = fs.readdir(directory);
+    // console.log(files);
 }
 
+const path = "./pruebasMD"
+const panthAbsolute='/Users/dsoo/Developer/CDMX013-md-links/pruebasMD'
 
-// fsIntentoDos.readFileSync, 'utf8', (pruebaFile, (err, data) => {
-//     if (err) {
-//         console.log(err.message);
-//     } else {
-//         console.log(data.toString());
-//     }
-// })
+const comprobandoRuta = pathLib.isAbsolute(panthAbsolute);
+console.log(comprobandoRuta);
+const routes = fs.readdirSync(path)
+console.log(routes)
 
-// const mdLinks = require("md-links");
-
-// mdLinks("./some/example.md")
-//   .then(links => {
-//     // => [{ href, text, file }, ...]
-//   })
-//   .catch(console.error);
-
-
-//   fs.readFile('testFile.txt', 'utf8', function (error, data) {
-//     if (error) {
-//        console.log("Failed to read file!");
-//        return error;
-//     }
-//     console.log(data);
-//   });
 
