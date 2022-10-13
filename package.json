@@ -3,5 +3,11 @@
   "version": "0.1.0",
   "engines": {
     "node": ">=16.x"
+  },
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "devDependencies": {
+    "jest": "^29.1.2"
   }
 }
