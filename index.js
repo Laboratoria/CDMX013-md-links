@@ -3,6 +3,13 @@ const path = require('path');
 
 const mdLinks = (dir, options) => {
   const extensionFile = path.extname(dir);
+
+  fs.readdir(__dirname, (err, files) => {
+    files.forEach(file => {
+      console.log(file);
+    });
+  });
+
   fs.readFile(dir, 'utf8', (err, data) => {
     if (err) {
       console.error(err);
@@ -13,4 +20,4 @@ const mdLinks = (dir, options) => {
   });
 };
 
-mdLinks('/home/vanesa/Documents/developer/laboratoria/CDMX013-md-links/README.md', '');
+mdLinks('/home/vanesa/Documents/developer/laboratoria/CDMX013-md-links/things.txt', '');
