@@ -3,7 +3,7 @@ import pathLib from 'node:path';
 import process from 'node:process';
 
 
-const path = "./pruebasMD"
+const path = "./pruebasMD" 
 const pathAbsolute = '/Users/dsoo/Developer/CDMX013-md-links/pruebasMD'
 const file = '/Users/dsoo/Developer/CDMX013-md-links/pruebasMD/prueba.md'
 //const options = { a: validate--, b: estadistic, c: a & b }//revisar como hacer un objeto
