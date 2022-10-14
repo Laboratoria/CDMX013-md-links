@@ -19,10 +19,13 @@
   },
   "keywords": [],
   "author": "",
-  "type":"module",
+  "type": "module",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/DsooRadha/CDMX013-md-links/issues"
   },
-  "homepage": "https://github.com/DsooRadha/CDMX013-md-links#readme"
+  "homepage": "https://github.com/DsooRadha/CDMX013-md-links#readme",
+  "dependencies": {
+    "get-the-link-markdown": "^1.0.1"
+  }
 }
