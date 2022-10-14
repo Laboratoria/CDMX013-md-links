@@ -1,6 +1,7 @@
 const pathExist = require("./lib/pathExist");
 const pathAbsolute = require("./lib/absolutePath");
 const path = require("path");
+const read = require("./lib/readFile");
 const fs = require("fs");
 let dir = process.argv[2];
 
@@ -16,7 +17,7 @@ module.exports = () => {
       }
 
       if (path.extname(newDir) == ".md") {
-        results.push(newDir);
+        results.push(read(newDir));
       }
     });
   };
@@ -24,7 +25,6 @@ module.exports = () => {
   if (pathExist(dir)) {
     openFolder(dir);
   }
-  console.log(results);
   return results;
 };
 
