@@ -9,29 +9,35 @@ module.exports = () => {
   dir = pathAbsolute(dir);
   const results = [];
   const openFolder = (dir) => {
-    list = fs.readdirSync(dir);
-    list.forEach((file) => {
-      let newDir = path.join(dir, file);
-      if (fs.lstatSync(newDir).isDirectory()) {
-        openFolder(newDir);
-      }
+    if (fs.lstatSync(dir).isDirectory()) {
+      list = fs.readdirSync(dir);
+      list.forEach((file) => {
+        let newDir = path.join(dir, file);
+        if (fs.lstatSync(newDir).isDirectory()) {
+          openFolder(newDir);
+        }
 
-      if (path.extname(newDir) == ".md") {
-        results.push(read(newDir));
-      }
-    });
+        if (path.extname(newDir) == ".md") {
+          results.push(read(newDir));
+        }
+      });
+    }
+
+    if (path.extname(dir) == ".md") {
+      results.push(read(dir));
+    }
   };
 
   if (pathExist(dir)) {
-    if (fs.lstatSync(dir).isDirectory()) {
+    /* if (fs.lstatSync(dir).isDirectory()) {
       openFolder(dir);
-    }
-
-    if (path.extname(dir) == ".md") results.push(read(dir));
+    }*/
+    openFolder(dir);
+    // if (path.extname(dir) == ".md") results.push(read(dir));
   }
-  console.log(results[0]);
-  return results[0];
+
+  return results;
 };
 
 const mdLink = require("./index.js");
-mdLink();
+console.log(mdLink());
