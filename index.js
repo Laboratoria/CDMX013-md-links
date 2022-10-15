@@ -19,6 +19,7 @@ module.exports = () => {
 
         if (path.extname(newDir) == ".md") {
           results.push(read(newDir));
+          //here must be process file inside ()
         }
       });
     }
@@ -29,11 +30,7 @@ module.exports = () => {
   };
 
   if (pathExist(dir)) {
-    /* if (fs.lstatSync(dir).isDirectory()) {
-      openFolder(dir);
-    }*/
     openFolder(dir);
-    // if (path.extname(dir) == ".md") results.push(read(dir));
   }
 
   return results;
