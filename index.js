@@ -23,9 +23,14 @@ module.exports = () => {
   };
 
   if (pathExist(dir)) {
-    openFolder(dir);
+    if (fs.lstatSync(dir).isDirectory()) {
+      openFolder(dir);
+    }
+
+    if (path.extname(dir) == ".md") results.push(read(dir));
   }
-  return results;
+  console.log(results[0]);
+  return results[0];
 };
 
 const mdLink = require("./index.js");
