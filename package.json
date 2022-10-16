@@ -26,6 +26,9 @@
   },
   "homepage": "https://github.com/DsooRadha/CDMX013-md-links#readme",
   "dependencies": {
-    "get-the-link-markdown": "^1.0.1"
+    "@types/marked": "^4.0.7",
+    "get-the-link-markdown": "^1.0.1",
+    "markdown-link-extractor": "^3.1.0",
+    "marked": "^4.1.1"
   }
 }

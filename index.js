@@ -1,4 +1,4 @@
-import { checkRoutes, convertingToAbsoluteRoutes, routeExist } from './api.js';
+import { checkRoutes, convertingToAbsoluteRoutes, routeExist } from './methods.js';
 import { CLI } from './helper.js'
 CLI();
 

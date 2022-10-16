@@ -1,14 +1,23 @@
 import fs from 'fs';
 import pathLib from 'node:path';
 
+import markdownLinkExtractor from 'markdown-link-extractor';
+
 //-------------------tipo de ruta y pasarla absoluta----------
-export const checkRoutes = (routes) => pathLib.isAbsolute(routes)
-export const convertingToAbsoluteRoutes = (routes) => pathLib.resolve(routes);
-export const routeExist=(routes)=> fs.existsSync(routes)
+ export const checkRoutes = (routes) => pathLib.isAbsolute(routes);
+ export const convertingToAbsoluteRoutes = (routes) => pathLib.resolve(routes);
+ export const routeExist = (routes) => fs.existsSync(routes);
+ export const pathIsFile = (routes) => fs.statSync(routes).isFile();
+ export const ext = (routes) =>  pathLib.extname(routes);
+ export const directoryPath = (routes) =>fs.lstatSync(routes, (true, false)).isDirectory();
+ export const filesInDirectory = (routes) =>fs.readdirSync(routes);
+ export const readFile =(routes) => fs.readFileSync(routes, 'utf8');
+ export const stringFile = (routes) => routes.toString()
+// console.log(pathIsFile)
 
 //     console.log(convertingToAbsolutePath)
 
- //console.log('checkRoutes');
+//console.log('checkRoutes');
 //------------version impura o algo asi--------
 // const routesOnlyAbsolutes = [];
 // const checkRoutes = pathLib.isAbsolute(file);
@@ -51,21 +60,29 @@ export const routeExist=(routes)=> fs.existsSync(routes)
 // console.log(directoryPath)
 
 // //-----------si es una carpeta extraer los archivos y paso sigueinte conocer su extension
-// const routes = fs.readdirSync(path)
-// console.log(routes)
+// const pathAbsolute = '/Users/dsoo/Developer/CDMX013-md-links/pruebasMD'
+//  const routes = fs.readdirSync(pathAbsolute)
+//  console.log(routes)
 // routes.forEach(element => {
 //     console.log(element)
 //     const ext = pathLib.extname(element)
 //     console.log(ext)
 // });
 // //-------------------If si es MD leerlo ----------
-// const readMyFile = fs.readFileSync(...fileMD, 'utf8')
-// console.log(readMyFile)
-// //-------------------Hay links? ----------
+const file = '/Users/dsoo/Developer/CDMX013-md-links/pruebasMD/prueba.md'
 
-// //-------------------extraer Links ----------
-// // const stringFile = readMyFile.toString
-// // console.log(stringFile)
+const readFile = fs.readFileSync(file, 'utf8')
+console.log(readFile)
+const { links } = markdownLinkExtractor(readFile);
+links.forEach(link => console.log(link));
+// const usandoMarked = marked(readMyFile, { sanitize: true })
+// console.log(usandoMarked );
+// -------------------Hay links? ----------
 
-// //-------------------cortarlos en pedacitos y meterlas partes a un objeto [nombre del archivo con extension, [text] y http] ----------
+// -------------------extraer Links ----------
+ const stringFile = readFile.toString()
+
+ console.log(stringFile)
+
+ //-------------------cortarlos en pedacitos y meterlas partes a un objeto [nombre del archivo con extension, [text] y http] ----------
 
