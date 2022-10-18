@@ -2,8 +2,8 @@ import fs from 'fs';
 import pathLib from 'node:path';
 import fetch from 'node-fetch';
 
-const file = '/Users/dsoo/Developer/CDMX013-md-links/pruebasMD/prueba.md'
-// const pathRelative = "./pruebasMD"
+const file = '/Users/dsoo/Developer/CDMX013-md-links/pruebasMD/README.md'
+const pathRelative = "./pruebasMD"
 //-------------------tipo de ruta y pasarla absoluta----------
 export const checkRoutes = (routes) => pathLib.isAbsolute(routes);
 export const convertingToAbsoluteRoutes = (routes) => pathLib.resolve(routes);
@@ -18,28 +18,26 @@ export const filename = (routes) => pathLib.basename(routes)
 
 // //-------------------If si es MD leerlo ----------
 //  const file = '/Users/dsoo/Developer/CDMX013-md-links/pruebasMD/prueba.md'
-const dataPath = [];
-
 const readFile = fs.readFileSync(file, 'utf8')
 
 // -------------------extraer Links ----------
 const stringFile = readFile.toString()
-
+const textUniqueInFile=[]
 console.log(filename(file))
 const links = stringFile.match(/\(http.*?\)/g);
 const totalLinks = links.length
-dataPath.push(totalLinks)
 console.log(totalLinks)
-const text = stringFile.match(/\[.*?\]/g);
+const text = new Set(stringFile.match(/\[.*?\]/g));
 text.forEach(element => {
   const textClean = element.replace(/\[|\]/g, "")
-  console.log(textClean)
-  dataPath.push(textClean)
+
+  // console.log(textClean)
 })
+const linksUniqueInFile=[]
+const uniqueLinks = new Set(links).size
 links.forEach(element => {
   const linksClean = element.replace(/\(|\)/g, "")
-  console.log(linksClean)
-  dataPath.push(linksClean)
+  linksUniqueInFile.push(linksClean)
 
   //comparar si los links son repetidos?
   //contabilizar los links
@@ -47,29 +45,31 @@ links.forEach(element => {
   //-------------------cortarlos en pedacitos y meterlas partes a un objeto [nombre del archivo con extension, [text] y http] ----------
 
 })
-console.log(dataPath)
-
-
-fetch('http://www.liimni.net')
-  .then(function (response) {
-    console.log(response.status);
+//console.log(dataPath)
+let message = ''
+let statusHttp=''
+fetch('http://www.limni.net')
+  .then((response) => {
+  statusHttp = response.status
+    console.log(statusHttp);
+    
   }).then(() => {
-    console.log("ok");
-  }).catch((error) => {
-    console.log('fail');
+    message = 'ok'
+    console.log(message);
+  }).catch((error, response) => {
+    console.log(response.status)
+    message = 'fail'
+    console.log(error);
   });
-// fetch('/api/wrong_endpoint')
-//   .then(response => {
-//     console.log(response) // full response body
-//     console.log(response.status); // get only the response.status
-//   })
-// Petición HTTP
-// fetch("'https://api.github.com/users/github")
-// .then((response) => {
-//   console.log(response.status); 
-// });
-    // .then(json => console.log(json));
-//  fetch('https://ejemplo.com')
-//  .then(response => console.log(response.status)) 
-//     .catch(err => console.log(err))
 
+const dataFileMD = {
+  href: linksUniqueInFile,
+  text: textUniqueInFile,
+  fileNamePath: file,
+  total: totalLinks,
+  unique: uniqueLinks,
+  status: statusHttp,
+  messageLink: message,
+}
+
+console.log(dataFileMD)
