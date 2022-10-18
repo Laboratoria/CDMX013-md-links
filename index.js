@@ -38,7 +38,7 @@ const mdLinks = (path) => {
     (extFile(path) === '.md')
     return path
 };
-console.log(mdLinks(pathRelative))
+console.log(mdLinks(file))
 
 // const selectFileMD= (path)=>{
 //     path.forEach(element =>{
@@ -57,10 +57,10 @@ console.log(mdLinks(pathRelative))
 // 
 //  console.log (readdingFileMD(fileRelative))
 
-const readFileMD = (path) => {
-    fs.readFileSync(path, 'utf8')
-}
-console.log (readFileMD(file))
+// const readFileMD = (path) => {
+//     fs.readFileSync(path, 'utf8')
+// }
+// console.log (readFileMD(file))
 //  const { links } = markdownLinkExtractor(readFile);
 //   links.forEach(link => console.log(link));
 

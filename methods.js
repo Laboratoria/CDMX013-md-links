@@ -2,18 +2,20 @@ import fs from 'fs';
 import pathLib from 'node:path';
 import markdownLinkExtractor from 'markdown-link-extractor'
 
-// const file = '/Users/dsoo/Developer/CDMX013-md-links/pruebasMD/prueba.md'
+
+const file = '/Users/dsoo/Developer/CDMX013-md-links/pruebasMD/README.md'
 // const pathRelative = "./pruebasMD"
 //-------------------tipo de ruta y pasarla absoluta----------
- export const checkRoutes = (routes) => pathLib.isAbsolute(routes);
- export const convertingToAbsoluteRoutes = (routes) => pathLib.resolve(routes);
- export const routeExist = (routes) => fs.existsSync(routes);
- export const pathIsFile = (routes) => fs.statSync(routes).isFile();
- export const extFile = (routes) =>  pathLib.extname(routes);
- export const directoryPath = (routes) =>fs.lstatSync(routes, (true, false)).isDirectory();
- export const filesInDirectory = (routes) =>fs.readdirSync(routes);
- export const readOnlyFile =(routes) => fs.readFileSync(routes, 'utf8');
- export const stringFile = (routes) => routes.toString()
+export const checkRoutes = (routes) => pathLib.isAbsolute(routes);
+export const convertingToAbsoluteRoutes = (routes) => pathLib.resolve(routes);
+export const routeExist = (routes) => fs.existsSync(routes);
+export const pathIsFile = (routes) => fs.statSync(routes).isFile();
+export const extFile = (routes) => pathLib.extname(routes);
+export const directoryPath = (routes) => fs.lstatSync(routes, (true, false)).isDirectory();
+export const filesInDirectory = (routes) => fs.readdirSync(routes);
+export const readOnlyFile = (routes) => fs.readFileSync(routes, 'utf8');
+export const filename =(routes)=> pathLib.basename(routes)
+//  export const stringFile = (routes) => routes.toString()
 //  export const { links } = markdownLinkExtractor(file);
 //  links.forEach(link => console.log(link));
 
@@ -78,8 +80,8 @@ import markdownLinkExtractor from 'markdown-link-extractor'
 // //-------------------If si es MD leerlo ----------
 //  const file = '/Users/dsoo/Developer/CDMX013-md-links/pruebasMD/prueba.md'
 
-// const readFile = fs.readFileSync(file, 'utf8')
-//  console.log(readFile)
+const readFile = fs.readFileSync(file, 'utf8')
+
 // const { links } = markdownLinkExtractor(readFile);
 //  links.forEach(link => console.log(link));
 // const usandoMarked = marked(readMyFile, { sanitize: true })
@@ -87,9 +89,16 @@ import markdownLinkExtractor from 'markdown-link-extractor'
 // -------------------Hay links? ----------
 
 // -------------------extraer Links ----------
-//  const stringFile = readFile.toString()
+const stringFile = readFile.toString()
 
-//  console.log(stringFile)
+// const text = stringFile.match(/\[.*?\]/g);
+// console.log(...text)
+const link = stringFile.match(/\(http.*?\)/g);
+console.log(link)
+console.log(filename(file))//result is "A string"
+// console.log({text, link,})
+// console.log(nameFile(file))
+
 
  //-------------------cortarlos en pedacitos y meterlas partes a un objeto [nombre del archivo con extension, [text] y http] ----------
 
