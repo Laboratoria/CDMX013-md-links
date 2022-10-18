@@ -4,6 +4,7 @@ const path = require("path");
 const read = require("./lib/readFile");
 const fs = require("fs");
 let dir = process.argv[2];
+const options = { validate: process.argv[3], stats: process.argv[4] };
 
 module.exports = () => {
   dir = pathAbsolute(dir);
@@ -18,14 +19,14 @@ module.exports = () => {
         }
 
         if (path.extname(newDir) == ".md") {
-          results.push(read(newDir));
+          results.push(read(newDir, options));
           //here must be process file inside ()
         }
       });
     }
 
     if (path.extname(dir) == ".md") {
-      results.push(read(dir));
+      results.push(read(dir, options));
     }
   };
 
