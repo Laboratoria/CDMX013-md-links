@@ -1,6 +1,7 @@
 import fs from 'fs';
 import pathLib from 'node:path';
-import fetch from 'wix-fetch';
+import fetch from 'node-fetch';
+
 const file = '/Users/dsoo/Developer/CDMX013-md-links/pruebasMD/prueba.md'
 // const pathRelative = "./pruebasMD"
 //-------------------tipo de ruta y pasarla absoluta----------
@@ -31,31 +32,44 @@ dataPath.push(totalLinks)
 console.log(totalLinks)
 const text = stringFile.match(/\[.*?\]/g);
 text.forEach(element => {
-    const textClean = element.replace(/\[|\]/g, "")
-    console.log(textClean)
-    dataPath.push(textClean)
+  const textClean = element.replace(/\[|\]/g, "")
+  console.log(textClean)
+  dataPath.push(textClean)
 })
 links.forEach(element => {
-    const linksClean = element.replace(/\(|\)/g, "")
-    console.log(linksClean)
-    dataPath.push(linksClean)
+  const linksClean = element.replace(/\(|\)/g, "")
+  console.log(linksClean)
+  dataPath.push(linksClean)
 
-    //comparar si los links son repetidos?
-    //contabilizar los links
-    //casos donde el corchete esta vacio
+  //comparar si los links son repetidos?
+  //contabilizar los links
+  //casos donde el corchete esta vacio
+  //-------------------cortarlos en pedacitos y meterlas partes a un objeto [nombre del archivo con extension, [text] y http] ----------
 
 })
 console.log(dataPath)
 
- //-------------------cortarlos en pedacitos y meterlas partes a un objeto [nombre del archivo con extension, [text] y http] ----------
 
- fetch('https://ejemplo.com')
- .then(function(response) {
-    // response.status (el código de respuesta)
-    // response.headers.get("Content-Type")
-    // ..
-  })
+fetch('http://www.liimni.net')
+  .then(function (response) {
+    console.log(response.status);
+  }).then(() => {
+    console.log("ok");
+  }).catch((error) => {
+    console.log('fail');
+  });
+// fetch('/api/wrong_endpoint')
+//   .then(response => {
+//     console.log(response) // full response body
+//     console.log(response.status); // get only the response.status
+//   })
+// Petición HTTP
+// fetch("'https://api.github.com/users/github")
+// .then((response) => {
+//   console.log(response.status); 
+// });
+    // .then(json => console.log(json));
+//  fetch('https://ejemplo.com')
+//  .then(response => console.log(response.status)) 
+//     .catch(err => console.log(err))
 
-  fetch(url)
-    .then(response => response.json())
-    .catch(err => console.log(err))
