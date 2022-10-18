@@ -1,6 +1,5 @@
 import {
-    checkRoutes, convertingToAbsoluteRoutes, routeExist, pathIsFile, filesInDirectory,
-    readOnlyFile, extFile
+    checkRoutes, convertingToAbsoluteRoutes, routeExist, pathIsFile, filesInDirectory, extFile
 } from './methods.js';
 import { CLI } from './helper.js'
 import fs from 'fs';
