@@ -6,6 +6,13 @@
   },
   "main": "index.js",
   "scripts": {
-    "eslint": "eslint --ext .js src/ test/"
+    "eslint": "eslint --ext .js src/ test/",
+    "test": "jest --coverage"
+  },
+  "dependencies": {
+    "markdown-it": "^13.0.1"
+  },
+  "devDependencies": {
+    "jest": "^29.2.0"
   }
 }
