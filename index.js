@@ -19,14 +19,14 @@ module.exports = () => {
         }
 
         if (path.extname(newDir) == ".md") {
-          results.push(read(newDir, options));
+          results.push(...read(newDir, options));
           //here must be process file inside ()
         }
       });
     }
 
     if (path.extname(dir) == ".md") {
-      results.push(read(dir, options));
+      results.push(...read(dir, options));
     }
   };
 
@@ -38,4 +38,15 @@ module.exports = () => {
 };
 
 const mdLink = require("./index.js");
-console.log(mdLink());
+const links = mdLink();
+const promises = links.map((p) =>
+  p.status.then((statusValue) => {
+    return {
+      ...p,
+      status: statusValue,
+    };
+  })
+);
+Promise.all(promises).then((data) => {
+  console.log(data);
+});
