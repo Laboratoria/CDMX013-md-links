@@ -3,5 +3,10 @@
   "version": "0.1.0",
   "engines": {
     "node": ">=16.x"
-  }
+  },
+  "description": "link validation",
+  "keywords": ["links", "validate links", "read md files", "filter links"],
+  "homepage": "https://github.com/KatyaLJ/CDMX013-md-links",
+  ""
+  
 }
