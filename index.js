@@ -1,52 +1,36 @@
-const pathExist = require("./lib/pathExist");
-const pathAbsolute = require("./lib/absolutePath");
-const path = require("path");
-const read = require("./lib/readFile");
-const fs = require("fs");
+const foundFile = require("./lib/foundFile.js");
 let dir = process.argv[2];
 const options = { validate: process.argv[3], stats: process.argv[4] };
 
-module.exports = () => {
-  dir = pathAbsolute(dir);
-  const results = [];
-  const openFolder = (dir) => {
-    if (fs.lstatSync(dir).isDirectory()) {
-      list = fs.readdirSync(dir);
-      list.forEach((file) => {
-        let newDir = path.join(dir, file);
-        if (fs.lstatSync(newDir).isDirectory()) {
-          openFolder(newDir);
+function mdLinks() {
+  if (options.validate === "--validate") {
+    const links = foundFile(dir, options);
+    const promises = links.map((p) =>
+      p.status.then((statusValue) => {
+        let ok;
+        if (statusValue >= 200 && statusValue < 300) {
+          ok = "ok";
+        } else {
+          ok = "fail";
         }
-
-        if (path.extname(newDir) == ".md") {
-          results.push(...read(newDir, options));
-          //here must be process file inside ()
-        }
-      });
-    }
-
-    if (path.extname(dir) == ".md") {
-      results.push(...read(dir, options));
-    }
-  };
-
-  if (pathExist(dir)) {
-    openFolder(dir);
+        return {
+          ...p,
+          status: statusValue,
+          ok: ok,
+        };
+      })
+    );
+    Promise.all(promises).then((data) => {
+      console.log(data);
+    });
+  } else if (options.validate === "--stats") {
+    console.log(options.validate);
+    return options;
+  } else {
+    const links = foundFile(dir, options);
+    console.log(links);
+    return links;
   }
+}
 
-  return results;
-};
-
-const mdLink = require("./index.js");
-const links = mdLink();
-const promises = links.map((p) =>
-  p.status.then((statusValue) => {
-    return {
-      ...p,
-      status: statusValue,
-    };
-  })
-);
-Promise.all(promises).then((data) => {
-  console.log(data);
-});
+mdLinks();
