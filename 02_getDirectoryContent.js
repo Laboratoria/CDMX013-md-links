@@ -23,4 +23,4 @@ console.log('is it directory ? ' + stats.isDirectory());
 // const buffertoString =  buffer.toString(); //this shows us what the file contents
 //   console.log(buffertoString);
 
-// cambio extra intento 1
+// cambio 2
