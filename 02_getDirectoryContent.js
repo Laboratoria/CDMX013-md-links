@@ -1,7 +1,7 @@
 // // Require the given module 
 const fs = require('fs'); // this module enables interacting with the file system in a way modeled on standard POSIX functions.
-const pathE = './holis.md'; //this is a constat of a  test path (ruta prueba)
-// const pathE = '../CDMX013-md-links'; //this is a constat of a  test path (ruta prueba)
+// const pathE = './holis.md'; //this is a constat of a  test path (ruta prueba)
+ const pathE = 'C:/Users/ylera/Desktop/Laboratoria/learnyounodeexercises'; //this is a constat of a  test path (ruta prueba)
 
 // Use statSync() method to store the returned
 // instance into variable named stats
