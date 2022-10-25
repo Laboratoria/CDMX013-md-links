@@ -20,9 +20,13 @@ function mdLinks() {
         };
       })
     );
-    Promise.all(promises).then((data) => {
-      console.log(data);
-    });
+    Promise.all(promises)
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   } else if (options.validate === "--stats") {
     console.log(options.validate);
     return options;
