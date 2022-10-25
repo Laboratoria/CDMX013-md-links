@@ -14,9 +14,7 @@ const cutDescriptionText = (str) =>{
 };
 
 const cutLinkText = (str) =>{
-    let firstParenthesis = str.lastIndexOf("(");
-    let secondParenthesis = str.lastIndexOf(")") +1;
-    let cuttedString = str.substring(firstParenthesis, secondParenthesis);
+    let cuttedString = str.match(/\((.*?)\)/);
     return cuttedString;
 };
 
