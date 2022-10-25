@@ -1,0 +1,69 @@
+console.log(chalk.cyan("Ingrese path:"));
+
+path.addListener("data", (data) => {
+   
+    console.log(chalk.magenta("Tu path es: " + data.toString()));
+   // Require the given module 
+  
+process.exit();
+
+//prueba dos
+const path = process.openStdin();
+
+console.log(chalk.blue("Ingrese path:"));
+
+
+path.addListener("data", (data) => {
+    const file = data.toString();
+    console.log(chalk.yellow("Tu path es: " + file));
+    fs.readFile(file, 'utf-8', (err, data) => {
+        if(err){
+            console.log(chalk.red('error no se encuentra archivo', err));
+        }else {
+            console.log(chalk.magenta(data,toString));
+        
+        }
+        process.exit();
+    })
+
+
+    //console.log(items);
+
+const items = fs.readdir('stores', {withFileTypes: true});
+for (let item of items) {
+    const type = item.isDirectory() ? 'folder' : 'file';
+    console.log(`${item.name}: ${type}`);
+}
+
+function findFiles(folderName) {
+    const items = fs.readdir(folderName, {withFileTypes: true});
+    items.forEach((item) => {
+        if (path.extname(item.name) === 'md'){
+            console.log(chalk.magenta(`Found file: ${item.name} in folder: ${folderName}`));
+        }
+        else {
+            findFiles(path.join(folderName, item.name));
+        }
+    });
+}
+findFiles('stores');
+
+
+})
+
+//3er prueba
+var texto = fs.readFileSync('notitas.txt', {encoding:'utf-8'});
+console.log(chalk.blue(texto));
+
+
+//prueba video
+async function main () {
+    await findFiles('test');
+}
+
+main ();
+
+async function findFiles(folderName) {
+    const mineFiles = await fs.readdir(folderName);
+    console.log(mineFiles);
+}
