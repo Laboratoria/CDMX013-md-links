@@ -7,7 +7,6 @@ const functions = require('./nodeMod.js');
 const axios = require('axios');
 
 let inputOfFilePath = process.argv[2].toString();
-let filePath = '';
 let fileExtension = path.extname(inputOfFilePath);
 console.log(fileExtension);
 
@@ -20,9 +19,7 @@ if(fileExtension === '.md'){
     filePath = inputOfFilePath;
     console.log('PATH OF THE md FILE: ' + inputOfFilePath);
     const links = read.filter(word => word.includes('http'));
-    //let regex = /\((.*?)\)/g;
-   // console.log(links);
-    let obtainedLinks;
+    //let obtainedLinks;
     
     links.forEach(e => {
         let object = { 
@@ -34,7 +31,7 @@ if(fileExtension === '.md'){
     });
    console.log(description);
    description.forEach(e=>{
-        axios.get(e.href[1])
+        /*axios.get(e.href[1])
         .then((response) =>  // handle success
             console.log(` href: ${e.href[1]}
             Status of request: ${response.status} Status text: ${response.statusText}`)
@@ -42,17 +39,9 @@ if(fileExtension === '.md'){
         .catch((error) =>
             // handle error
             console.log(error.status)
-        )
+        )*/
+        functions.validateLinks(e.href[1]);
    })
-// axios.get(description[0].href[1])
-// .then((response) =>  // handle success
-//   console.log(` href: ${description[0].href[1]}
-//   Status of request: ${response.status} Status text: ${response.statusText}`)
-// )
-// .catch((error) =>
-//   // handle error
-//   console.log(error)
-//   )
 } else{
     console.log('This is not a Markdown(.md) file');
 }

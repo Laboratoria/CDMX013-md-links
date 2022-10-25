@@ -1,5 +1,6 @@
 //const fs = require('node:fs/promises');
 const fs = require('node:fs');
+const axios = require('axios');
 
 const readFile = (filePath) => {
     let read = fs.readFileSync(filePath).toString().split('\r');
@@ -18,4 +19,16 @@ const cutLinkText = (str) =>{
     return cuttedString;
 };
 
-module.exports = { readFile, cutDescriptionText, cutLinkText };
+const validateLinks = (link) => {
+    axios.get(link)
+   .then((response) =>  // handle success
+        console.log(` href: ${link}
+        Status of request: ${response.status} Status text: ${response.statusText}`)
+     )
+     .catch((error) =>
+        // handle error
+        console.log(error.status)
+    )
+}
+
+module.exports = { readFile, cutDescriptionText, cutLinkText, validateLinks };
