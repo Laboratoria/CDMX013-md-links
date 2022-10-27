@@ -1,50 +1,55 @@
-// const fs = require('fs'); // this module enables interacting with the file system in a way modeled on standard POSIX functions.
-// //  fs.readFile('README.md'); // This method will return a Buffer object containing the complete contents of the file.
-//  const buffer = fs.readFileSync('holis.md'); // This method will return a Buffer object containing the complete contents of the file.
-//  //  console.log( buffer);
-//  const buffertoString =  buffer.toString(); //this shows us what the file contents
-//     console.log(buffertoString);
-//  const newLinesIdentified = buffertoString.split('http'); // del array identificaremos los http, // split divide un array y devuelve uno nuevo.
-//   // console.log(newLinesIdentified); //this new array cut all "http"'s that were in this file
-//  const counterNewLines = newLinesIdentified.length - 1; // contador de cuantas nuevas lineas hay o saltos de line \n 
-  // console.log(counterNewLines); //
+const fs = require('fs'); // this module enables interacting with the file system in a way modeled on standard POSIX functions.
+var path = require('path');
 
- //to work with files and directiry paths, this shows us root, dir, base, ext name, 
-//  const path = require('path');
-//  const pathObj = path.parse(__filename);
-// //  const path = 'C:/Users/ylera/Desktop/Labo2/CDMX013-md-links';
-//  console.log(path)
-
-// // to get each ext
-// console.log(path.extname('./README.md'))
-// // returns '.html'
-
-// // verify if a file exists in node.js  //done
-// if(fs.existsSync('./README.md')){
-//   console.log('El archivo EXISTE');
-// }else{
-//   console.log('El archivo NO EXISTE')
-// }
-
- 
+ const pathdeprueba = './holis.md';
+// const pathdeprueba = './thumb.png';
+//const pathdeprueba = 'C:/Users/ylera/Desktop/Laboratoria/learnyounodeexercises';
 /* module.exports = function mdLinks(path, options){
-  return new Promise((resolve, reject) => {
-    resolve([
-      {
-        test: '',
-        file: '',
-        href: ''
-      }
-    ])
-  })
+ return new Promise((resolve, reject) => {
+   resolve([
+     {
+       test: '',
+       file: '',
+       href: ''
+     }
+   ])
+ })
 } */
 
 
-function getMdLinks(path){
+function getMdLinks(TestPath) {
+  // 01_a Verify if a file exists in node.js
+  if (fs.existsSync(TestPath)) { //01_a a file exists in node.js
+    console.log('El archivo EXISTE');
+    // si la ruta no es absoluta conviertela en absoluta ..... etc... -> resolvepath
+    if (!path.isAbsolute(TestPath)){ // if it's not absolute
+      path.resolve(TestPath); // become in absolute
+      console.log(path.resolve(TestPath));
+    }
+    //////// BE SURE YOU'RE WORKING WITH A FILE 
+    let stats = fs.statSync(TestPath); // Use statSync() method to store the returned   
+    if(stats.isFile()){
+        console.log(TestPath + '---> IS A FILE '); 
+        // BE SURE YOU'RE WORKING WITH MD FILES 
+        if(path.extname(TestPath)=== '.md'){
+          console.log(path.extname(TestPath));
+          // extraer links y guardarlos en un array de objetos
+        }else{
+          // console.log(path.extname(TestPath));
+          console.log('Tu archivo es ' + path.extname(TestPath) + ' intenta con alguno que sea .md ');
+        }
+
+    } else if(fs.statSync(TestPath)){
+        console.log(TestPath +'---> IS A DIRECTORY' );   
+    }
+
+  } else { // 01_a a file doesn't exist in node.js
+    console.log('El archivo NO EXISTE')
+  }
   //identificar si la ruta es absoluta ..... etc... -> resolvepath
 
   //hacer la lectura qarchivos que son md, ....
-
+  // answerFileOrDirectory(pathE);
   //identificar las url.....
 
   //condensar toda ladta para retornarla ...
@@ -52,4 +57,4 @@ function getMdLinks(path){
 
 
 //ejecucion de preuba
-getMdLinks('pathdeprueba')
+getMdLinks(pathdeprueba);
