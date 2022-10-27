@@ -10,38 +10,13 @@ let inputOfFilePath = process.argv[2].toString();
 let fileExtension = path.extname(inputOfFilePath);
 console.log(fileExtension);
 
-// //console.log(linksInformation);
-let description = [];
-
 if(fileExtension === '.md'){
     let read = functions.readFile(inputOfFilePath);
-    //console.log(read);
-    filePath = inputOfFilePath;
-    console.log('PATH OF THE md FILE: ' + inputOfFilePath);
-    const links = read.filter(word => word.includes('http'));
-    //let obtainedLinks;
-    
-    links.forEach(e => {
-        let object = { 
-            href: functions.cutLinkText(e),
-            text: functions.cutDescriptionText(e).replace("[", "").replace("]", ""),
-            file: inputOfFilePath
-        };
-        description.push(object);
-    });
+    let description = functions.getLinks(read, inputOfFilePath);
    console.log(description);
-   description.forEach(e=>{
-        /*axios.get(e.href[1])
-        .then((response) =>  // handle success
-            console.log(` href: ${e.href[1]}
-            Status of request: ${response.status} Status text: ${response.statusText}`)
-        )
-        .catch((error) =>
-            // handle error
-            console.log(error.status)
-        )*/
-        functions.validateLinks(e.href[1]);
-   })
+//    description.forEach(e => {
+//         functions.validateLinks(e.href[1]);
+//    })
 } else{
     console.log('This is not a Markdown(.md) file');
 }

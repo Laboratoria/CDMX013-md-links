@@ -1,6 +1,7 @@
 //const fs = require('node:fs/promises');
 const fs = require('node:fs');
 const axios = require('axios');
+const path = require('node:path');
 
 const readFile = (filePath) => {
     let read = fs.readFileSync(filePath).toString().split('\r');
@@ -15,9 +16,25 @@ const cutDescriptionText = (str) =>{
 };
 
 const cutLinkText = (str) =>{
-    let cuttedString = str.match(/\((.*?)\)/);
+    let cuttedString = str.match(/\]\((.*?)\)/);
     return cuttedString;
 };
+
+const getLinks = (docContent, path) =>{
+    const links = docContent.filter(word => word.includes('http'));
+    let description = [];
+
+    links.forEach(e => {
+        let object = { 
+            href: e.match(/\]\((.*?)\)/),
+            text: e.match(/\[(.*?)\]/),
+            file: path,
+        };
+        description.push(object);
+    });
+
+    return description;
+}
 
 const validateLinks = (link) => {
     axios.get(link)
@@ -27,8 +44,10 @@ const validateLinks = (link) => {
      )
      .catch((error) =>
         // handle error
-        console.log(error.status)
+        console.log(` href: ${link} 
+        ----------------------- ${error}-----------------------------
+        Status of request: ${error.response.status} Status text: ${error.response.statusText}`)
     )
 }
 
-module.exports = { readFile, cutDescriptionText, cutLinkText, validateLinks };
+module.exports = { readFile,  getLinks, validateLinks };
