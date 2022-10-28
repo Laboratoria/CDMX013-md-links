@@ -12,11 +12,19 @@ console.log(fileExtension);
 
 if(fileExtension === '.md'){
     let read = functions.readFile(inputOfFilePath);
+    console.log(read)
     let description = functions.getLinks(read, inputOfFilePath);
-   console.log(description);
-//    description.forEach(e => {
-//         functions.validateLinks(e.href[1]);
-//    })
+   //console.log(description);
+    let array = [];
+    let validation;
+   description.forEach(e => {
+        let request = functions.validateLinks(e);
+        //console.log(kini);
+        validation = request.then((res)=> {return array.push(res)})
+        //console.log(validation);
+   })
+   //validation.then((res) => console.log(array))
+
 } else{
     console.log('This is not a Markdown(.md) file');
 }

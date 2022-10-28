@@ -22,9 +22,10 @@ const cutLinkText = (str) =>{
 
 const getLinks = (docContent, path) =>{
     const links = docContent.filter(word => word.includes('http'));
+    const result = links.filter(element => element.match(/\]\((.*?)\)/));
     let description = [];
 
-    links.forEach(e => {
+    result.forEach(e => {
         let object = { 
             href: e.match(/\]\((.*?)\)/),
             text: e.match(/\[(.*?)\]/),
@@ -37,17 +38,13 @@ const getLinks = (docContent, path) =>{
 }
 
 const validateLinks = (link) => {
-    axios.get(link)
-   .then((response) =>  // handle success
-        console.log(` href: ${link}
-        Status of request: ${response.status} Status text: ${response.statusText}`)
-     )
-     .catch((error) =>
-        // handle error
-        console.log(` href: ${link} 
-        ----------------------- ${error}-----------------------------
-        Status of request: ${error.response.status} Status text: ${error.response.statusText}`)
-    )
-}
+    let request = axios.get(link.href[1]);
+    let object = request.then((response) => {
+    return {href: link.href[1], text: link.text[1], path: link.file, StatusOfRequest: response.status, StatusText: response.statusText}
+    }) .catch((err) => { return console.log({href: link.href[1], text: link.text[1], path: link.file, StatusOfRequest: err})})
 
+ return object
+}
 module.exports = { readFile,  getLinks, validateLinks };
+
+//href: link.href[1], text: link.text[1], path: link.file, StatusOfRequest: err.response.status, StatusText: err.response.statusText
