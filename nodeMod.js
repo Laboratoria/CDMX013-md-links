@@ -3,6 +3,24 @@ const fs = require('node:fs');
 const axios = require('axios');
 const path = require('node:path');
 
+const resolveToAbsolutePath = (receivedPath) =>{
+    let checkifPathIsAbsolute = path.isAbsolute(receivedPath);
+  
+    if(checkifPathIsAbsolute === true){
+      return receivedPath
+    } else if( checkifPathIsAbsolute === false){
+      let newPath =  path.resolve(__dirname, receivedPath)
+      return newPath
+    }
+  } 
+
+const getFileExtension = (filePath) => path.extname(filePath);
+
+const readDirectory = (path) => {
+    let files = fs.readdirSync(url).toString().split(',');
+    return files;
+}
+
 const readFile = (filePath) => {
     let read = fs.readFileSync(filePath).toString().split('\r');
     return read;
@@ -45,7 +63,7 @@ const validateLinks = (link) => {
  return object
 }
 
-module.exports = { readFile,  getLinks, validateLinks };
+module.exports = { resolveToAbsolutePath, getFileExtension, readFile,  getLinks, validateLinks };
 
 //href: link.href[1], text: link.text[1], path: link.file, StatusOfRequest: err.response.status, StatusText: err.response.statusText
 //e.match(/(.*?)\]/),

@@ -1,24 +1,31 @@
 //module.exports = () => { //..}};
 
 const process = require('node:process');
-const { argv } = require('node:process');
-const path = require('node:path');
 const functions = require('./nodeMod.js');
-const axios = require('axios');
 
-let inputOfFilePath = process.argv[2].toString();
-let fileExtension = path.extname(inputOfFilePath);
-console.log(fileExtension);
+let inputOfFilePath = process.argv[2];
+const option = process.argv[3];
+
+const path = functions.resolveToAbsolutePath(inputOfFilePath);
+const fileExtension = functions.getFileExtension(path);
 
 if(fileExtension === '.md'){
-    let read = functions.readFile(inputOfFilePath);
-    //console.log(read)
-    let descriptions = functions.getLinks(read, inputOfFilePath);
-   //console.log(description);
-    let array = descriptions.map(x => functions.validateLinks(x));
-    //console.log(array)
-    let all = Promise.all(array);
-    all.then(console.log)
+    if(option === '--validate'){
+        let read = functions.readFile(path);
+        //console.log(read)
+        let descriptions = functions.getLinks(read, path);
+        //console.log(description);
+        let array = descriptions.map(element => functions.validateLinks(element));
+        //console.log(array)
+        let allRequests = Promise.all(array);
+        allRequests.then(console.log)
+    } else if(option === '--stats'){
+        console.log('Here are the STATS!')
+    } else if(option === '--validate--stats'){
+        console.log('Validation + stats')
+    } else{
+        console.log('Wrong command! Please enter one of these options: --validate / -- stats / --validate--stats')
+    }
 
 } else{
     console.log('This is not a Markdown(.md) file');
@@ -33,3 +40,7 @@ console.log(filenames); */
 // let array = ['https://user-images.githubusercontent.com/110297/135544666-4efa54f1-4ff6-4c4c-b398-6df04ef56117.jpg', 'zzzzz', 'hhhhh', 'https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Grids', 'https://css-tricks.com/snippets/css/complete-guide-grid/']
 // const links = array.filter(word => word.includes('http'));
 // console.log(links);
+
+// else if(option === null){
+//     console.log('Please enter a command')
+// }
