@@ -28,7 +28,7 @@ const getLinks = (docContent, path) =>{
     result.forEach(e => {
         let object = { 
             href: e.match(/\]\((.*?)\)/),
-            text: e.match(/\[(.*?)\]/),
+            text: cutDescriptionText(e),
             file: path,
         };
         description.push(object);
@@ -40,11 +40,14 @@ const getLinks = (docContent, path) =>{
 const validateLinks = (link) => {
     let request = axios.get(link.href[1]);
     let object = request.then((response) => {
-    return {href: link.href[1], text: link.text[1], path: link.file, StatusOfRequest: response.status, StatusText: response.statusText}
-    }) .catch((err) => { return console.log({href: link.href[1], text: link.text[1], path: link.file, StatusOfRequest: err})})
-
+    return {href: link.href[1], text: link.text, path: link.file, StatusOfRequest: response.status, StatusText: response.statusText}
+    }, (reject) => { return {href: link.href[1], text: link.text, path: link.file, StatusOfRequest: reject.toJSON().status, StatusText: reject.toJSON().message, Code:reject.toJSON().code}})
  return object
 }
+
 module.exports = { readFile,  getLinks, validateLinks };
 
 //href: link.href[1], text: link.text[1], path: link.file, StatusOfRequest: err.response.status, StatusText: err.response.statusText
+//e.match(/(.*?)\]/),
+
+//{href: link.href[1], text: link.text, path: link.file, StatusOfRequest: reject.request.status, StatusText: reject.response.statusText}
