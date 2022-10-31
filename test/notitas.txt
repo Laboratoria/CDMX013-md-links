@@ -1,3 +1,5 @@
+/*
+//pediir path y mostarlo
 console.log(chalk.cyan("Ingrese path:"));
 
 path.addListener("data", (data) => {
@@ -5,65 +7,119 @@ path.addListener("data", (data) => {
     console.log(chalk.magenta("Tu path es: " + data.toString()));
    // Require the given module 
   
-process.exit();
 
-//prueba dos
-const path = process.openStdin();
-
-console.log(chalk.blue("Ingrese path:"));
+});*/
 
 
-path.addListener("data", (data) => {
-    const file = data.toString();
-    console.log(chalk.yellow("Tu path es: " + file));
-    fs.readFile(file, 'utf-8', (err, data) => {
-        if(err){
-            console.log(chalk.red('error no se encuentra archivo', err));
-        }else {
-            console.log(chalk.magenta(data,toString));
-        
-        }
-        process.exit();
-    })
-
-
-    //console.log(items);
-
-const items = fs.readdir('stores', {withFileTypes: true});
-for (let item of items) {
-    const type = item.isDirectory() ? 'folder' : 'file';
-    console.log(`${item.name}: ${type}`);
-}
-
-function findFiles(folderName) {
-    const items = fs.readdir(folderName, {withFileTypes: true});
-    items.forEach((item) => {
-        if (path.extname(item.name) === 'md'){
-            console.log(chalk.magenta(`Found file: ${item.name} in folder: ${folderName}`));
-        }
-        else {
-            findFiles(path.join(folderName, item.name));
-        }
-    });
-}
-findFiles('stores');
-
-
+fs.readFileSync('README.md', 'utf-8' , (err, data) => {
+    if(err) {
+        console.log(chalk.red('error: ', err));
+      } else {
+        console.log(data);
+      }
 })
-
-//3er prueba
-var texto = fs.readFileSync('notitas.txt', {encoding:'utf-8'});
-console.log(chalk.blue(texto));
+console.log('esto se ejecuta antes que esté el archivo');
 
 
-//prueba video
+let archivo = fs.readFileSync('notitas.txt', 'utf-8');
+console.log(archivo);
+
+
+console.log('Esto se muestra después de haber leído el achivo2.txt (por el readFileSync)');
+
+//prueba poniendo ruta completa
 async function main () {
-    await findFiles('test');
+    console.log(await findFiles(_dirname + '/test'));
 }
-
 main ();
 
-async function findFiles(folderName) {
-    const mineFiles = await fs.readdir(folderName);
-    console.log(mineFiles);
+async function findFiles(folderName){
+    const files = [];
+    const items = await fs.readdir(folderName,{ withFileTypes: true}) ;
+
+    for (const item of items){
+    if(item.isDirectory()){
+        files = files.concat( await findFiles(`${folderName}/${item.name}`));
+    }
+} else {
+    if (item.name === 'README.md'){
+        files.push(`${folderName}/${item.name}`)
+    }
 }
+
+return files;
+
+}
+
+
+//leer archivo
+const fs = require('fs');
+
+const readFiles = (route) => {
+    let extractLinks = fs.readFileSync(route, 'utf-8').match(/\[(.+)\]\((https?:\/\/.+)\)/gi);
+let result= extractLinks.map((link) => {
+  let obj = {
+    href : '',
+    text : '',
+    file : route;
+  }
+  return obj;
+});    
+ console.log(result);
+ return extractLinks;
+}
+
+module.exports = {
+  readFiles
+}
+
+
+//path absoluto
+const chalk = require('chalk'); //colores
+const path = require('path');
+
+const absolutePath = (directoryPath) => {
+    if (!path.isAbsolute(directoryPath)){
+        return path.resolve(directoryPath);
+    }else {
+        return directoryPath;
+    }
+}
+
+module.exports = {
+    absolutePath
+}
+
+
+//index
+/*const path = require('path');
+const { readfiles } = require('./readFiles');
+
+const { absolutePath } = require('./path')
+
+const directoryPath = process.argv.slice(2);
+console.log(absolutePath(route));
+
+const extMd = (extPath(route));
+if (extMd == '.md') {
+    console.log(readfiles(route));
+} else {
+    console.log('El archivo no es .md');
+}*/
+
+//leer archivo solo leer
+const fs = require('fs');
+const chalk = require('chalk');
+
+
+fs.readFileSync('README.md', 'utf-8' , (err, data) => {
+  if(err) {
+      console.log(chalk.red('error: ', err));
+    } else {
+      console.log(data);
+    }
+})
+console.log(chalk.blue('Leemos el archivo'));
+
+let archivo = fs.readFileSync('README.md', 'utf-8');
+console.log(chalk.magenta(archivo));
