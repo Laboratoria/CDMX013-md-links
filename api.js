@@ -1,16 +1,17 @@
-/*
+
 const fn = require ('./fn.js');
 
  
-// GET .md FILE EXTENSION
-let allFiles = [];
-const mdFiles = allFiles.filter(file => {
-    if(functions.getMdFile(file) == '.md'){
+ // get file extention .md  para cuando lea tambien folders
+ const getMdFiles = allFiles.filter(file => {
+    if(functions.getExtName(file) == '.md'){
      return file;
     }
 })
 
+
+
+
 module.exports = {
-mdFiles
+getMdFiles
 }
-*/
