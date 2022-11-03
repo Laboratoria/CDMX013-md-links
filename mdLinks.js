@@ -30,9 +30,7 @@ const validate = (route) => {
   console.log(list);
   return list;
 }
-validate('README.md')
-
-
+validate('README.md');
 
 module.exports = {
   items
