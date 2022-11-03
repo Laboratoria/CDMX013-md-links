@@ -14,19 +14,39 @@ if(fileExtension === '.md'){
         let read = functions.readFile(path);
         //console.log(read)
         let descriptions = functions.getLinks(read, path);
-        //console.log(description);
+        //console.log(descriptions);
         let array = descriptions.map(element => functions.validateLinks(element));
         //console.log(array)
         let allRequests = Promise.all(array);
         allRequests.then(console.log)
     } else if(option === '--stats'){
-        console.log('Here are the STATS!')
+        let read = functions.readFile(path);
+        //console.log(read)
+        let descriptions = functions.getLinks(read, path);
+        //console.log(descriptions);
+        let stats =functions.getStats(descriptions)
+        console.log(stats)
     } else if(option === '--validate--stats'){
-        console.log('Validation + stats')
-    } else{
+        let read = functions.readFile(path);
+        //console.log(read)
+        let descriptions = functions.getLinks(read, path);
+        //console.log(descriptions);
+        let array = descriptions.map(element => functions.validateLinks(element));
+        //console.log(array)
+        let allRequests = Promise.all(array);
+        let result = allRequests.then((res) => functions.statsAndValidation(res));
+        result.then(console.log);
+        //console.log(result)
+    } else if(option === undefined){
+        let read = functions.readFile(path);
+        let descriptions = functions.getLinks(read, path);
+        // return new Promise((resolve, reject) => {
+        //     resolve(descriptions);
+        //     reject('Error')
+        // })
+    }else{
         console.log('Wrong command! Please enter one of these options: --validate / -- stats / --validate--stats')
     }
-
 } else{
     console.log('This is not a Markdown(.md) file');
 }
