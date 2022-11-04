@@ -7,8 +7,8 @@ const absolutePath = (fileMd) => {
         if (fs.existsSync(fileMd)) {
             //file exists
             if (path.isAbsolute(fileMd) == false) {
-                const absolutePath = resolve(fileMd);
-                return absolutePath;
+                const absoPath = resolve(fileMd);
+                return absoPath;
 
             } else {
                 return fileMd
@@ -19,5 +19,6 @@ const absolutePath = (fileMd) => {
          return 'Tu archivo no es valido';
     }
 }
-console.log(module);
+//console.log(module);
 module.exports = { absolutePath }
+module.exports = { absoPath }
