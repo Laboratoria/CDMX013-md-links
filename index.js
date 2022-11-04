@@ -1,7 +1,9 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
-const myPath = './readme.md';
+const myPath = './README.md';
+const {extract} = require ('./linkextract.js');
+
 
 //variable global que almacene la ruta
 //entrar en el punto donde es absoluto
@@ -11,18 +13,36 @@ const mdlinks = (myPath, options) => {
   if (path.isAbsolute(myPath) === false) {
     myPath = path.resolve(myPath); //rtua absoluta o relativa?
   }
-  //console.log(myPath)
+  
 
   //const checkPath = fs.statSync(myPath)
 
   if (fs.existsSync(myPath)) {
-    let otherPath = path.extname(myPath);
-    console.log(otherPath)
+    let checkPath = fs.statSync(myPath);
+
+if(checkPath.isDirectory()){
+  console.log(TypeError);
+}
+
+    
+
+let otherPath = path.extname(myPath);
+console.log(otherPath);
+
     if (otherPath != ".md") {
       console.log(TypeError);
     }
+    
+    fs.readFile(myPath, 'utf-8', (err, data) => {
+      if(err) {
+         console.log('error: ', err);
+        } else {
+         //extractorLinks(data);
+         extract (data);
+         }
+       });
 
-
+      //  let texto = fs.readFileSync('<markdown.md>').toString();
     // booleano convertir a if
     //console.log(checkPath.isFile());   
     //console.log(checkPath.isDirectory());            //existe o no existe la ruta?
@@ -44,19 +64,9 @@ const mdlinks = (myPath, options) => {
   //   return array
   // }
 
-  // console.log(prueba);
-  // })
 
+  
 
-  // fs.readFile(myPath [options], callback)
-
-  // fs.readFile('archivo.txt', 'utf-8', (err, data) => {
-  //   if(err) {
-  //     console.log('error: ', err);
-  //   } else {
-  //     console.log(data);
-  //   }
-  // });
 }
 mdlinks(myPath);
 
