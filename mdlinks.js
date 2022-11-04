@@ -1,11 +1,14 @@
 const fs = require('fs'); // this module enables interacting with the file system in a way modeled on standard POSIX functions.
-var path = require('path');
+const path = require('path');
+const {validate } = require('./functionsMD.js')
 
 const pathdeprueba = './holis.md';
 // const pathdeprueba = './thumb.png';
 //const pathdeprueba = 'C:/Users/ylera/Desktop/Laboratoria/learnyounodeexercises';
+// ///const options = validate;
 
-function getMdLinks(TestPath) {
+
+function getMdLinks(TestPath, option) {
   // 01_a Verify if a file exists in node.js
   if (fs.existsSync(TestPath)) { //01_a a file exists in node.js
     console.log('El archivo EXISTE');
@@ -38,7 +41,12 @@ function getMdLinks(TestPath) {
             file: path.resolve(TestPath) // Ruta del archivo donde se encontró el link.
           })
         })
-        console.log(newArray);
+        console.log(newArray); // => [{ href, text, file}]
+        if(option==='validate'){
+          validate(newArray);
+        }
+        
+
 
       } else {
         // console.log(path.extname(TestPath));
@@ -47,6 +55,7 @@ function getMdLinks(TestPath) {
 
     } else if (fs.statSync(TestPath)) {
       console.log(TestPath + '---> IS A DIRECTORY');
+        
     }
 
   } else { // 01_a a file doesn't exist in node.js
@@ -63,7 +72,7 @@ function getMdLinks(TestPath) {
 
 
 //ejecucion de preuba
-getMdLinks(pathdeprueba);
+getMdLinks(pathdeprueba, 'validate');
 
 
 /* module.exports = function mdLinks(path, options){

@@ -1,9 +1,7 @@
 const fs = require('fs'); // this module enables interacting with the file system in a way modeled on standard POSIX functions.
-
+var path = require('path');
 const pathE = './holis.md'; //this is a constat of a  test path (ruta prueba)
 // const pathE = 'C:/Users/ylera/Desktop/Laboratoria/learnyounodeexercises'; //this is a constat of a  test path (ruta prueba)
-//esto es una libreria
-var path = require('path');
 
 function resolvePath(pathE) {
 
