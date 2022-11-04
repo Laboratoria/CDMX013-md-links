@@ -1,11 +1,48 @@
 const fs = require('fs'); // this module enables interacting with the file system in a way modeled on standard POSIX functions.
-var path = require('path');
+const path = require('path');
+const axios = require('axios');
 
-const pathdeprueba = './holis.md';
+const pathdeprueba = './README.md';
 // const pathdeprueba = './thumb.png';
 //const pathdeprueba = 'C:/Users/ylera/Desktop/Laboratoria/learnyounodeexercises';
+// ///const options = validate;
 
-function getMdLinks(TestPath) {
+// const axios = require('axios');
+
+function validate(eachObject) {
+    const makingPromiseRequest = axios.get(eachObject.href);  // Hacer una petición 
+    return makingPromiseRequest
+        .then(function (response) {
+            // manejar respuesta exitosa
+            // console.log(response.status);
+            const validatedObject = {...eachObject, status: response.status, ok: 'ok'
+            };
+            // console.log(validatedObject);
+            return validatedObject;
+        })
+        .catch(function (error) {
+          console.log(error.validateStatus)
+            const validatedObject = {...eachObject, ok: 'fail'};
+            // console.log(validatedObject);
+            return validatedObject;
+        })
+}
+//    // llamando a la promesa1 con File test run
+// const resolvedPromise = validate ({
+//     href: 'https://user-images.githubusercontent.com/110297/',
+//     text: 'Markdown',
+//     file: 'C:\\Users\\ylera\\Desktop\\Labo2\\CDMX013-md-links\\holis.md'
+//   });
+
+  // resolvedPromise.then((resultado) => console.log(resultado))
+
+  //   console.log(resolvedPromise);
+
+
+ module.exports = { validate }
+
+
+function getMdLinks(TestPath, option) {
   // 01_a Verify if a file exists in node.js
   if (fs.existsSync(TestPath)) { //01_a a file exists in node.js
     console.log('El archivo EXISTE');
@@ -26,7 +63,7 @@ function getMdLinks(TestPath) {
         // extraer links y guardarlos en un array de objetos ///(\[.*\])\((https?)(:\/\/[^\s\)]+)\)/
         const regex = /(\[.*\])(\(https?(:\/\/[^\s\)]+)\))/g
         const allLinks = textFile.match((regex));
-        newArray = [];
+        const newArray = [];
         allLinks.forEach(element => {
           const separate = element.split('](');
           const text = separate[0].replace('[', '');
@@ -38,7 +75,19 @@ function getMdLinks(TestPath) {
             file: path.resolve(TestPath) // Ruta del archivo donde se encontró el link.
           })
         })
-        console.log(newArray);
+        //console.log(newArray); // => [{ href, text, file}]
+        
+        if(option==='validate'){
+          newArray.forEach((eachObject) => {
+            const resolvedPromise = validate(eachObject);
+
+             resolvedPromise.then((resultado) => console.log(resultado))
+
+            //  console.log(resolvedPromise);
+          })
+        }
+        
+
 
       } else {
         // console.log(path.extname(TestPath));
@@ -47,6 +96,7 @@ function getMdLinks(TestPath) {
 
     } else if (fs.statSync(TestPath)) {
       console.log(TestPath + '---> IS A DIRECTORY');
+        
     }
 
   } else { // 01_a a file doesn't exist in node.js
@@ -63,7 +113,7 @@ function getMdLinks(TestPath) {
 
 
 //ejecucion de preuba
-getMdLinks(pathdeprueba);
+getMdLinks(pathdeprueba, 'validate');
 
 
 /* module.exports = function mdLinks(path, options){
