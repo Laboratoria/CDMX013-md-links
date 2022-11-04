@@ -1,4 +1,4 @@
-/*
+
 const fn = require ('./fn.js');
 
 const mdLinks = (filePath, opt) => 
@@ -8,16 +8,18 @@ const mdLinks = (filePath, opt) =>
     const isPathAbsolute = fn.isPathAbsolute(filePath)
     ? filePath
     : fn.convertPathToAbsolute(filePath);
-   
+    
 
+   
    let allFiles = [];
     // leer carpetas
-    if(functions.isFolder(isPathAbsolute)){
-        allFiles = [...allFiles,...functions.readFolders(isPathAbsolute)];
+    if(fn.isFolder(isPathAbsolute)){
+        allFiles = [...allFiles,...fn.readFolders(isPathAbsolute)];
     }else{
         allFiles.push(isPathAbsolute);
 
     }
+    
 
     // obtener archivos .md
     const filesMd = allFiles.filter(file => {
@@ -25,32 +27,33 @@ const mdLinks = (filePath, opt) =>
      return file;
     }
     })
+   
 
    const linksArray = [];
 
      filesMd.forEach((file) => {
         // leer archivos
         const filteredFiles = fn.readFile(file);
-        // GET LINKS
+        // obtener links
         const filterMethod = /\[(.+)\]\((https?:\/\/.+)\)/gi;
         const resultLinks = [...filteredFiles.matchAll(filterMethod)];
         if(resultLinks !== null || resultLinks !== 0){
             resultLinks.forEach(url => {
-                arrayLinks.push({
+                linksArray.push({
                     href: url[2],
                     text: url[1].slice(0, 50),
-                    file
+                    file: file
                 })
             }) 
         }
 
     })
+    reject(linksArray);
 
 
     
-// });
+ });
 
 module.exports = {
-isPathAbsolute
+mdLinks
 }
-*/

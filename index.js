@@ -2,6 +2,7 @@ const fn = require ('./fn.js');
 const api = require ('./api');
 const axios = require ('axios');
 
+
 // not absolute ./README.md
 // absolute     /Users/jazmin/Downloads/Laboratoria/Mex013/MD_links_S/CDMX013-md-links-S/README.md
 
@@ -15,10 +16,14 @@ const axios = require ('axios');
 //console.log(fn.isFolder('test-files'));
 
 // leer las carpetas
-console.log(fn.readFolders('test-files'))
+//console.log(fn.readFolders('test-files'))
 
 // leer archivo
 // console.log(fn.readFile("text.txt"));
 
 // obtener archivo .md
 // console.log(fn.getMdFile("README."))  // luego obterner solo los archivos .md
+
+api.mdLinks(process.argv[2])
+.then(result => console.log(result))
+.catch(result => console.log(result));
