@@ -17,67 +17,61 @@
 const axios = require('axios');
 
 function validate(eachObject) {
-
-    // Hacer una petición 
-  const makingPromiseRequest =  axios.get(eachObject.href)
+    const makingPromiseRequest = axios.get(eachObject.href);  // Hacer una petición 
+    return makingPromiseRequest
         .then(function (response) {
             // manejar respuesta exitosa
-           // console.log(response.status);
-           const validatedObject ={
-            ...oneObject, 
-            status: response.status, 
-            ok:'ok'};
-           return validatedObject;
+            // console.log(response.status);
+            const validatedObject = {...eachObject, status: response.status, ok: 'ok'
+            };
+            // console.log(validatedObject);
+            return validatedObject;
         })
         .catch(function (error) {
-            const validatedObject ={
-                ...oneObject, 
-                status: error.status, 
-                ok:'fail'};
-               return validatedObject;
-            // manejar error
-            // console.log(eachObject);
-            // console.log(error.code);
-            // //const errorResponse = error.response;
-            // eachObject.status = error.response.status;
-            // eachObject.ok = 'fail';
-            // console.log(eachObject)
-           
+            //console.log(error.response);  //error.cause
+            const validatedObject = {...eachObject, status: error.cause.code, ok: 'fail'};
+            //  console.log(validatedObject);
+            return validatedObject;
         })
-        // .then(function () {
-        //     // siempre sera executado
-        // });
-
 }
+   // llamando a la promesa1 con File test run
+const resolvedPromise = validate (
+    {
+        href: 'http://community.laboratoria.la/c/js',
+        text: 'foro de la comunidad',
+        file: 'C:\\Users\\ylera\\Desktop\\Labo2\\CDMX013-md-links\\README.md',
+        ok: 'fail'
+      }
+  );
 
-module.exports = { validate }
-// File test run
-// validate(  {
+  resolvedPromise.then((resultado) => console.log(resultado))
+
+    console.log(resolvedPromise);
+
+
+ module.exports = { validate }
+
+
+
+
+
+// function getResolve(oneObject) { //peticion http
+//     const promesa1 = axios.get(oneObject.href)
+//     return promesa1
+//         .then((resultado) => {
+//             console.log(resultado.status);
+//             const validatedObject = { ...oneObject, status: resultado.status, ok: 'ok' }
+//             return validatedObject;
+//         });
+// }
+
+// // llamando a la promesa1
+// const promesaResolve = getResolve({             //promesa con el resultado
 //     href: 'https://es.wikipedia.org/wiki/Markdown',
 //     text: 'Markdown',
 //     file: 'C:\\Users\\ylera\\Desktop\\Labo2\\CDMX013-md-links\\holis.md'
-//   });
+// });
 
+// // promesaResolve.then((resultado) => console.log(resultado))
 
-
-
-  function getResolve(oneObject){ //peticion http
-    const promesa1 = axios.get(oneObject.href)
-    return promesa1
-    .then((resultado)=>{
-        console.log(resultado.status);
-        const validatedObject = {...oneObject, status: resultado.status, ok:'ok'}
-        return validatedObject;
-    });
-  }
-
-// llamando a la promesa1
-const promesaResolve = getResolve(  {             //promesa con el resultado 
-    href: 'https://es.wikipedia.org/wiki/Markdown',
-    text: 'Markdown',
-    file: 'C:\\Users\\ylera\\Desktop\\Labo2\\CDMX013-md-links\\holis.md'
-  });
-
-  promesaResolve.then((resultado)=> console.log(resultado))
-
-  console.log(promesaResolve);
+// // console.log(promesaResolve)
