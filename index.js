@@ -6,13 +6,19 @@ const axios = require ('axios');
 // absolute     /Users/jazmin/Downloads/Laboratoria/Mex013/MD_links_S/CDMX013-md-links-S/README.md
 
 // saber si la ruta es absoluta
-console.log(fn.isPathAbsolute('/Users/jazmin/Downloads/Laboratoria/Mex013/MD_links_S/CDMX013-md-links-S/README.md'));
+// console.log(fn.isPathAbsolute('/Users/jazmin/Downloads/Laboratoria/Mex013/MD_links_S/CDMX013-md-links-S/README.md'));
 
 // convertir ruta a absoluta
- console.log(fn.convertPathToAbsolute('./README.md'));
+//console.log(fn.convertPathToAbsolute('./README.md'));
+
+// es una carpeta?
+//console.log(fn.isFolder('test-files'));
+
+// leer las carpetas
+console.log(fn.readFolders('test-files'))
 
 // leer archivo
-console.log(fn.readFile("text.txt"));
+// console.log(fn.readFile("text.txt"));
 
 // obtener archivo .md
-console.log(fn.getMdFile("README."))  // luego obterner solo los archivos .md
+// console.log(fn.getMdFile("README."))  // luego obterner solo los archivos .md
