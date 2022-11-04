@@ -13,7 +13,7 @@ const isPathAbsolute = (route) => path.isAbsolute(route);
 const convertPathToAbsolute = (route) => path.resolve(route);
 
 // Es una carpeta?
-const isFolder = (route) => fs.lstatSync(route).isDirectory();
+const isFolder = (route) => fs.lstatSync(route).isDirectory() 
 
 // leer las carpetas
 const readFolders = (routePath, resultFiles = []) => {

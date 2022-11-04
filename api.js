@@ -33,7 +33,7 @@ const mdLinks = (filePath, opt) =>
 
      filesMd.forEach((file) => {
         // leer archivos
-        const filteredFiles = fn.readFile(file);
+        const filteredFiles = fn.readFile(file)
         // obtener links
         const filterMethod = /\[(.+)\]\((https?:\/\/.+)\)/gi;
         const resultLinks = [...filteredFiles.matchAll(filterMethod)];
