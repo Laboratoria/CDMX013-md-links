@@ -22,14 +22,13 @@ function validate(eachObject) {
         .then(function (response) {
             // manejar respuesta exitosa
             // console.log(response.status);
-            const validatedObject = {...eachObject, status: response.status, ok: 'ok'
-            };
+            const validatedObject = {...eachObject, status: response.status, ok: 'ok'};
             // console.log(validatedObject);
             return validatedObject;
         })
         .catch(function (error) {
             //console.log(error.response);  //error.cause
-            const validatedObject = {...eachObject, status: error.cause.code, ok: 'fail'};
+            const validatedObject = {...eachObject, status: error.response.status, ok: 'fail'};
             //  console.log(validatedObject);
             return validatedObject;
         })
@@ -37,10 +36,10 @@ function validate(eachObject) {
    // llamando a la promesa1 con File test run
 const resolvedPromise = validate (
     {
-        href: 'http://community.laboratoria.la/c/js',
-        text: 'foro de la comunidad',
+        href: 'https://www.freecodecamp.org/news/how-to-write-a-javascript-promise-4ed8d44292b8/)',
+        text: 'How to Write a JavaScript Promise - freecodecamp ',
         file: 'C:\\Users\\ylera\\Desktop\\Labo2\\CDMX013-md-links\\README.md',
-        ok: 'fail'
+        
       }
   );
 
@@ -52,7 +51,8 @@ const resolvedPromise = validate (
  module.exports = { validate }
 
 
-
+ //'https://nodejs.org/api/path.html',//'https://www.freecodecamp.org/news/how-to-write-a-javascript-promise-4ed8d44292b8/)',
+        //text: 'How to Write a JavaScript Promise - freecodecamp ',
 
 
 // function getResolve(oneObject) { //peticion http

@@ -1,31 +1,39 @@
 const fs = require('fs'); // this module enables interacting with the file system in a way modeled on standard POSIX functions.
 const path = require('path');
 const axios = require('axios');
+// const {validate} = require('./validate')
 
-const pathdeprueba = './README.md';
+const pathdeprueba = './holis.md';
 // const pathdeprueba = './thumb.png';
 //const pathdeprueba = 'C:/Users/ylera/Desktop/Laboratoria/learnyounodeexercises';
 // ///const options = validate;
 
 // const axios = require('axios');
 
-function validate(eachObject) {
-    const makingPromiseRequest = axios.get(eachObject.href);  // Hacer una petición 
-    return makingPromiseRequest
-        .then(function (response) {
-            // manejar respuesta exitosa
-            // console.log(response.status);
-            const validatedObject = {...eachObject, status: response.status, ok: 'ok'
-            };
-            // console.log(validatedObject);
+function validate(arrayToValidate) {
+  const newValidateArray = [];
+
+  arrayToValidate.forEach((eachObject) =>{
+  const makingPromiseRequest = axios.get(eachObject.href)  // Hacer una petición 
+  // return makingPromiseRequest
+      .then(function (response) {
+          // manejar respuesta exitosa
+          // console.log(response.status);
+          const validatedObject = {...eachObject, status: response.status, ok: 'ok'};
+          // console.log(validatedObject);
+          return validatedObject;
+      })
+      .catch(function (error) {
+          //console.log(error.response);  //error.cause
+          //if(error.response){
+            const validatedObject = {...eachObject, status: error.response.status, ok: 'fail'};
+            //  console.log(validatedObject);
             return validatedObject;
-        })
-        .catch(function (error) {
-          console.log(error.validateStatus)
-            const validatedObject = {...eachObject, ok: 'fail'};
-            // console.log(validatedObject);
-            return validatedObject;
-        })
+          //}   
+      })
+    newValidateArray.push(makingPromiseRequest);
+})
+return newValidateArray;
 }
 //    // llamando a la promesa1 con File test run
 // const resolvedPromise = validate ({
@@ -39,7 +47,7 @@ function validate(eachObject) {
   //   console.log(resolvedPromise);
 
 
- module.exports = { validate }
+
 
 
 function getMdLinks(TestPath, option) {
@@ -61,8 +69,9 @@ function getMdLinks(TestPath, option) {
         // read the file
         const textFile = fs.readFileSync(TestPath, 'utf-8');
         // extraer links y guardarlos en un array de objetos ///(\[.*\])\((https?)(:\/\/[^\s\)]+)\)/
-        const regex = /(\[.*\])(\(https?(:\/\/[^\s\)]+)\))/g
+        const regex = /(\[.*\])(\(https?(:\/\/[^\s\)]+)\))/g  
         const allLinks = textFile.match((regex));
+        // console.log(allLinks);
         const newArray = [];
         allLinks.forEach(element => {
           const separate = element.split('](');
@@ -75,17 +84,14 @@ function getMdLinks(TestPath, option) {
             file: path.resolve(TestPath) // Ruta del archivo donde se encontró el link.
           })
         })
-        //console.log(newArray); // => [{ href, text, file}]
+        // console.log(newArray); // => [{ href, text, file}]
         
         if(option==='validate'){
-          newArray.forEach((eachObject) => {
-            const resolvedPromise = validate(eachObject);
-
-             resolvedPromise.then((resultado) => console.log(resultado))
-
+            // console.log(validate(newArray));
+            Promise.all(validate(newArray)).then((resultado) => console.log(resultado));
+            // resolvedPromise.then((resultado) => console.log(resultado))
             //  console.log(resolvedPromise);
-          })
-        }
+          }
         
 
 
@@ -115,6 +121,7 @@ function getMdLinks(TestPath, option) {
 //ejecucion de preuba
 getMdLinks(pathdeprueba, 'validate');
 
+module.exports = { validate };
 
 /* module.exports = function mdLinks(path, options){
  return new Promise((resolve, reject) => {
