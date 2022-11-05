@@ -1,66 +1,50 @@
-//module.exports = () => { //..}};
-
-const process = require('node:process');
 const functions = require('./nodeMod.js');
 
-let inputOfFilePath = process.argv[2];
-const option = process.argv[3];
+const mdLinks = (givenPath, options) => {
 
-const path = functions.resolveToAbsolutePath(inputOfFilePath);
-const fileExtension = functions.getFileExtension(path);
+    const path = functions.resolveToAbsolutePath(givenPath);
+    const fileExtension = functions.getFileExtension(path);
 
-if(fileExtension === '.md'){
-    if(option === '--validate'){
-        let read = functions.readFile(path);
-        //console.log(read)
-        let descriptions = functions.getLinks(read, path);
-        //console.log(descriptions);
-        let array = descriptions.map(element => functions.validateLinks(element));
-        //console.log(array)
-        let allRequests = Promise.all(array);
-        allRequests.then(console.log)
-    } else if(option === '--stats'){
-        let read = functions.readFile(path);
-        //console.log(read)
-        let descriptions = functions.getLinks(read, path);
-        //console.log(descriptions);
-        let stats =functions.getStats(descriptions)
-        console.log(stats)
-    } else if(option === '--validate--stats'){
-        let read = functions.readFile(path);
-        //console.log(read)
-        let descriptions = functions.getLinks(read, path);
-        //console.log(descriptions);
-        let array = descriptions.map(element => functions.validateLinks(element));
-        //console.log(array)
-        let allRequests = Promise.all(array);
-        let result = allRequests.then((res) => functions.statsAndValidation(res));
-        result.then(console.log);
-        //console.log(result)
-    } else if(option === undefined){
-        let read = functions.readFile(path);
-        let descriptions = functions.getLinks(read, path);
-        // return new Promise((resolve, reject) => {
-        //     resolve(descriptions);
-        //     reject('Error')
-        // })
-    }else{
-        console.log('Wrong command! Please enter one of these options: --validate / -- stats / --validate--stats')
-    }
-} else{
-    console.log('This is not a Markdown(.md) file');
+    return new Promise((resolve, reject) =>{
+        if(fileExtension === '.md'){
+            if(options.validate === true && options.stats === false){ 
+
+                let descriptions = functions.getLinks(path);
+                let array = descriptions.map(element => functions.validateLinks(element));
+                let allRequests = Promise.all(array);
+                resolve(allRequests);
+
+            } else if(options.validate === false && options.stats === true){
+
+                let descriptions = functions.getLinks(path);
+                let stats = functions.getStats(descriptions);
+                resolve(stats);
+                
+            } else if(options.validate === true && options.stats === true){
+
+                let descriptions = functions.getLinks(path);
+                let array = descriptions.map(element => functions.validateLinks(element));
+                let allRequests = Promise.all(array);
+                let result = allRequests.then((res) => functions.statsAndValidation(res));
+                resolve(result);
+
+            } else if(options.validate === false && options.stats === false){
+
+                let descriptions = functions.getLinks(path);
+                resolve(descriptions);
+
+            }else{
+
+                resolve('Wrong command! Please enter one of these options: --validate / -- stats / --validate --stats');
+
+            }
+        } else{
+
+            reject(chalk.yellow('This is not a Markdown(.md) file'));
+
+        }
+    })
+
 }
 
-// READ FILES OF A DIRECTORY
-/*let url = process.argv[2];
-let filenames = fs.readdirSync(url).toString().split(',');  //Convertido a un array
-console.log("\nCurrent filenames in directory:");
-console.log(filenames); */
-
-// let array = ['https://user-images.githubusercontent.com/110297/135544666-4efa54f1-4ff6-4c4c-b398-6df04ef56117.jpg', 'zzzzz', 'hhhhh', 'https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Grids', 'https://css-tricks.com/snippets/css/complete-guide-grid/']
-// const links = array.filter(word => word.includes('http'));
-// console.log(links);
-
-// else if(option === null){
-//     console.log('Please enter a command')
-// }
+module.exports = { mdLinks }

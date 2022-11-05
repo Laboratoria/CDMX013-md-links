@@ -2,7 +2,7 @@
 const fs = require('node:fs');
 const axios = require('axios');
 const path = require('node:path');
-const { resolve } = require('node:path');
+const chalk = require('chalk');
 
 const resolveToAbsolutePath = (receivedPath) =>{
     let checkifPathIsAbsolute = path.isAbsolute(receivedPath);
@@ -22,12 +22,8 @@ const readDirectory = (path) => {
     return files;
 }
 
-const readFile = (filePath) => {
-    let read = fs.readFileSync(filePath).toString();
-    return read;
-};
-
-const getLinks = (docContent, path) =>{
+const getLinks = (path) =>{
+    const docContent = fs.readFileSync(path).toString();
     const regex = /\[(.*?)\)/g
     const findLinks = docContent.match(regex);
     const links = findLinks.filter(element => element.includes('http'));
@@ -69,9 +65,8 @@ const getStats = (link) => {
             return 0;
         }
     });
-    //console.log(order);
+
     for(let i = 0; i <= order.length-1; i++){
-        //console.log(order[i].href)
       if(JSON.stringify(order[i]) != JSON.stringify(order[i+1])){
       unique.push(order[i]);
       }else{
@@ -80,24 +75,15 @@ const getStats = (link) => {
     }    
     let stats = { total: link.length, unique: unique.length, repeated: repeated.length};
 
-   // return stats
-    return new Promise((resolve, reject) =>{
-        resolve(stats)
-        reject('Esto es un error')
-    })
+   return stats
   }
 
 const statsAndValidation = (links) => {
     let statsOfLinks = getStats(links);
-    //statsOfLinks.then(console.log)
     let brokenLinks =  links.filter(e => e.StatusOfRequest != '200');
-    //console.log(brokenLinks);
-    let result = statsOfLinks.then((res) => {return {total: links.length, unique: res.unique, broken: brokenLinks.length}})
-    return new Promise((resolve, reject) =>{
-        resolve(result)
-        reject('Esto es un error')
-    })
+    let result = {total: links.length, unique: statsOfLinks.unique, broken: brokenLinks.length}
+    return result
 }
 
-module.exports = { resolveToAbsolutePath, getFileExtension, readFile,  getLinks, validateLinks, getStats, statsAndValidation };
+module.exports = { resolveToAbsolutePath, getFileExtension, getLinks, validateLinks, getStats, statsAndValidation };
 
