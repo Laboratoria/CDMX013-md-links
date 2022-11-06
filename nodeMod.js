@@ -1,4 +1,3 @@
-//const fs = require('node:fs/promises');
 const fs = require('node:fs');
 const axios = require('axios');
 const path = require('node:path');
@@ -16,11 +15,6 @@ const resolveToAbsolutePath = (receivedPath) =>{
   } 
 
 const getFileExtension = (filePath) => path.extname(filePath);
-
-const readDirectory = (path) => {
-    let files = fs.readdirSync(url).toString().split(',');
-    return files;
-}
 
 const getLinks = (path) =>{
     const docContent = fs.readFileSync(path).toString();

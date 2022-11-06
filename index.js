@@ -40,7 +40,7 @@ const mdLinks = (givenPath, options) => {
             }
         } else{
 
-            reject(chalk.yellow('This is not a Markdown(.md) file'));
+            reject('Hey this is not a Markdown(.md) file!');
 
         }
     })

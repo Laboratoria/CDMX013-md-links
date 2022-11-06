@@ -1,17 +1,36 @@
 {
   "name": "md-links",
   "version": "0.1.0",
+  "description": "Module that checks the links on your .md files",
+  "main": "index.js",
   "bin": {
-    "md-links": "./cli.js"
+    "md-links": "cli.js"
   },
   "engines": {
     "node": ">=16.x"
   },
-  "scripts": {
-    "start": "node index.js"
-  },
+  "scripts": {},
   "dependencies": {
     "axios": "^1.1.3",
     "chalk": "^4.1.2"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarianRav/CDMX013-md-links-MarianRav.git"
+  },
+  "keywords": [
+    "links",
+    "links validation"
+  ],
+  "author": "Marian Villavicencio",
+  "license": "ISC",
+  "type":"commonjs",
+  "bugs": {
+    "url": "https://github.com/MarianRav/CDMX013-md-links-MarianRav/issues"
+  },
+  "homepage": "https://github.com/MarianRav/CDMX013-md-links-MarianRav#readme"
 }
