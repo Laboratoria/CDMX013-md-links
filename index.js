@@ -1,6 +1,8 @@
 const fn = require ('./fn.js');
 const api = require ('./api');
 const axios = require ('axios');
+const chalk = require ('chalk');
+
 
 
 // not absolute ./README.md
@@ -23,6 +25,10 @@ const axios = require ('axios');
 
 // obtener archivo .md
 // console.log(fn.getMdFile("README."))  // luego obterner solo los archivos .md
+
+// validar links
+
+
 
 api.mdLinks(process.argv[2])
 .then(result => console.log(result))
