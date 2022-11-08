@@ -1,4 +1,8 @@
-const functions = require('./nodeMod.js');
+const functions = require('./nodeMod');
+const { getLinks } = require('./components/getLinks');
+const { validateLinks } = require('./components/validateLinks');
+const { getStats } = require('./components/getStats');
+const { statsAndValidation } = require('./components/statsAndValidation');
 
 const mdLinks = (givenPath, options) => {
 
@@ -9,33 +13,29 @@ const mdLinks = (givenPath, options) => {
         if(fileExtension === '.md'){
             if(options.validate === true && options.stats === false){ 
 
-                let descriptions = functions.getLinks(path);
-                let array = descriptions.map(element => functions.validateLinks(element));
+                let descriptions = getLinks(path);
+                let array = descriptions.map(element => validateLinks(element));
                 let allRequests = Promise.all(array);
                 resolve(allRequests);
 
             } else if(options.validate === false && options.stats === true){
 
-                let descriptions = functions.getLinks(path);
-                let stats = functions.getStats(descriptions);
+                let descriptions = getLinks(path);
+                let stats = getStats(descriptions);
                 resolve(stats);
                 
             } else if(options.validate === true && options.stats === true){
 
-                let descriptions = functions.getLinks(path);
-                let array = descriptions.map(element => functions.validateLinks(element));
+                let descriptions = getLinks(path);
+                let array = descriptions.map(element => validateLinks(element));
                 let allRequests = Promise.all(array);
-                let result = allRequests.then((res) => functions.statsAndValidation(res));
+                let result = allRequests.then((res) => statsAndValidation(res));
                 resolve(result);
 
             } else if(options.validate === false && options.stats === false){
 
-                let descriptions = functions.getLinks(path);
+                let descriptions = getLinks(path);
                 resolve(descriptions);
-
-            }else{
-
-                resolve('Wrong command! Please enter one of these options: --validate / -- stats / --validate --stats');
 
             }
         } else{

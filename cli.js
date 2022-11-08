@@ -17,18 +17,18 @@ mdLinks(inputOfFilePath, options)
         });
 
        console.log(` 
-       ${chalk.bgRed(' Other commands: ')} ${chalk.yellow('--validate / -- stats / --validate --stats')} `)
+       ${chalk.bgRed(' Other commands: ')} ${chalk.yellow('--validate / -- stats / --validate --stats')} `);
 
     } else if(options.validate === false && options.stats === true){
         
             console.log(`
-  ${chalk.magenta('► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ')} STATS ${chalk.magenta(' ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄')}
-                
-            ${chalk.cyan('Total:')} ${res.total}
-            ${chalk.yellow('Unique:')} ${res.unique}
-            ${chalk.green('Repeated:')} ${res.repeated}
+                ${chalk.magenta('► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ')} STATS ${chalk.magenta(' ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄')}
+                                
+                            ${chalk.cyan('Total:')} ${res.total}
+                            ${chalk.yellow('Unique:')} ${res.unique}
+                            ${chalk.green('Repeated:')} ${res.repeated}
 
-  ${chalk.magenta('○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ')}
+                ${chalk.magenta('○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ')}
             `)
 
     } else if(options.validate === true && options.stats === false){
@@ -40,13 +40,13 @@ mdLinks(inputOfFilePath, options)
     } else if(options.validate === true && options.stats === true){
 
          console.log(`
-  ${chalk.magenta('► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ')} STATS & VALIDATE ${chalk.magenta(' ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄')}
-                
-            ${chalk.cyan('Total:')} ${res.total}
-            ${chalk.yellow('Unique:')} ${res.unique}
-            ${chalk.red.bold('Broken:')} ${res.broken}
+                ${chalk.magenta('► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ')} STATS & VALIDATE ${chalk.magenta(' ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄')}
+                                
+                            ${chalk.cyan('Total:')} ${res.total}
+                            ${chalk.yellow('Unique:')} ${res.unique}
+                            ${chalk.red.bold('Broken:')} ${res.broken}
 
-  ${chalk.magenta('○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○')}
+                ${chalk.magenta('○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○')}
             `)
 
     }
@@ -57,5 +57,5 @@ mdLinks(inputOfFilePath, options)
                                 ${chalk.bgRed(' ERROR: ')} ${chalk.white.bold(err)} 
 
    ${chalk.magenta('▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄')}
-    `))
+ `))
 
