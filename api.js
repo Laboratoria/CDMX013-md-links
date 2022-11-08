@@ -1,5 +1,6 @@
 
 const fn = require ('./fn.js');
+const chalk = require ('chalk');
 
 const mdLinks = (filePath, opt) => 
  new Promise((resolve, reject) => { 
@@ -16,7 +17,7 @@ const mdLinks = (filePath, opt) =>
     if(fn.isFolder(isPathAbsolute)){
         allFiles = [...allFiles,...fn.readFolders(isPathAbsolute)];
     }else{
-        allFiles.push(isPathAbsolute);
+        allFiles.push(isPathAbsolute) ;
 
     }
     
@@ -46,10 +47,15 @@ const mdLinks = (filePath, opt) =>
                 })
             }) 
         }
-
+        
     })
-    reject(linksArray);
 
+
+
+
+    resolve(linksArray) 
+
+    reject('nel no hay nada')
 
     
  });

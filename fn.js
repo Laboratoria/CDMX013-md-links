@@ -5,17 +5,16 @@ const http = require('http');
 
 
 
-// saber si la ruta es absoluta
-//pasandole route como parametro la hago pura
+// Saber si la ruta es absoluta
 const isPathAbsolute = (route) => path.isAbsolute(route);
 
-// convertir la ruta en absoluta
+// Convertir la ruta en absoluta
 const convertPathToAbsolute = (route) => path.resolve(route);
 
 // Es una carpeta?
 const isFolder = (route) => fs.lstatSync(route).isDirectory() 
 
-// leer las carpetas
+// Leer las carpetas funcion recursiva 
 const readFolders = (routePath, resultFiles = []) => {
     const files = fs.readdirSync(routePath);
     files.forEach((file) => {
@@ -29,16 +28,14 @@ const readFolders = (routePath, resultFiles = []) => {
         return resultFiles;
     }
 
-// leer archivo
+// Leer archivo
 const readFile = (route) => fs.readFileSync(route, "utf-8");
 
-// obtener archivos .md
+// Obtener archivos .md
 const getMdFile = (file) => path.extname(file);
 
-
-
-// validar linksc
-// const validateLinks = 
+// validar links 
+const validateLinks = (href) => axios.get(href);
 
 
 module.exports = {
@@ -47,5 +44,6 @@ convertPathToAbsolute,
 isFolder,
 readFolders,
 readFile,
-getMdFile
+getMdFile,
+validateLinks
 }
