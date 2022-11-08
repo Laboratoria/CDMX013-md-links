@@ -24,27 +24,16 @@ const extractLink = (text) => {
         }
 
     })
-    //console.log (links)
+//console.log (links)
 }
 module.exports = {
     extractLink
 }
 
-//validar un solo link
-const oneLink = 'https://nodejs.org/api/fs.html#fs_fs_readdir_path_options_callback'
-axios.get(oneLink)
-    .then(response => {
-        const linkValidate = {
-            href: oneLink,
-            statusCode: response.status,
-            status: response.statusText,
-        }
-        console.log(linkValidate)
-        //obtenemos datos de respuesta de servidor
-    })
-    .catch(error => {
-        console.log("invalid")
-    }
 
-        //respuesta de error del servidor
-    )
+//validar un solo link
+
+    //traer todos los links
+    // como acceder a estas propiedades en axios text: Texto que aparecía dentro del link (<a>).
+    //file: Ruta del archivo donde se encontró el link.
+    //error todas propiedades

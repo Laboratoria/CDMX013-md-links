@@ -2,7 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const pathFile = './README.md'
 const  {extractLink} = require ('./extractlinks.js')
-
+const  {validate} = require ('./validate.js')
 const mdLinks = (pathFile, options) => {
   //console.log(pathFile)
   if (path.isAbsolute(pathFile) === false) {
@@ -26,7 +26,7 @@ const mdLinks = (pathFile, options) => {
       if (err) {
         console.log("error:", err);
       } else {
-        extractLink(data);
+         validate (extractLink(data)); //llamar a validate 
       }
     });
   } else {
