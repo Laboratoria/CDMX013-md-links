@@ -5,6 +5,7 @@
     "node": ">=16.x"
   },
   "dependencies": {
-    "markdown-it": "^13.0.1"
+    "markdown-it": "^13.0.1",
+    "node-fetch": "^2.6.7"
   }
 }
