@@ -41,9 +41,9 @@ const mdLinks = (filePath, opt) =>
         if(resultLinks !== null || resultLinks !== 0){
             resultLinks.forEach(url => {
                 linksArray.push({
-                    href: url[2],
-                    text: url[1].slice(0, 50),
-                    file: file
+                    href: url[2], // url encontrada
+                    text: url[1].slice(0, 50), // texto del link
+                    file: file // ruta del archivo donde se encontro el link
                 })
             }) 
         }
