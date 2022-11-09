@@ -38,3 +38,9 @@ algunas estadísticas.
 
 En este proyecto crearás una herramienta de línea de comando (CLI) así como tu
 propia librería (o biblioteca - library) en JavaScript.
+
+[How to Write a JavaScript Promise - 404 freecodecamp](https://www.youtube.com/fulanitodetal/20202)', 
+
+[Recursión o Recursividad - 503 Laboratoria Developers](https://medium.com/laboratoria-developers/recursi%C3%B3n-o-recursividad-ec8f1a359727), 
+
+
