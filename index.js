@@ -4,7 +4,7 @@ const pathFile = './README.md'
 const  {extractLink} = require ('./extractlinks.js')
 const  {validate} = require ('./validate.js')
 const mdLinks = (pathFile, options) => {
-  //console.log(pathFile)
+
   if (path.isAbsolute(pathFile) === false) {
     pathFile = path.resolve(pathFile);
   }
@@ -16,17 +16,17 @@ const mdLinks = (pathFile, options) => {
       return (TypeError);
     }
 
-    let extFile = path.extname(pathFile);
-    console.log(extFile);
+    let textFile = path.extname(pathFile);
+    //console.log(textFile);
 
-    if (extFile != ".md") {
+    if (textFile != ".md") {
       console.log(TypeError);
     }
     fs.readFile(pathFile, "utf-8", (err, data) => {
       if (err) {
         console.log("error:", err);
       } else {
-         validate (extractLink(data)); //llamar a validate 
+         extractLink(data); //llamar a validate
       }
     });
   } else {

@@ -1,28 +1,28 @@
+/*const axios = require("axios")
 
-const validate = (links) =>{
-   const newArray= links.map ((link) => {
-    axios.get(link)
-    .then(response => {  //obtenemos datos de respuesta de servidor
+function validate (links){
+ const requestHttp = axios.get(links.href);
+ 
+ requestHttp.then(response => {  
+    if(response.status >=200 && response.status<300){
         const linkValidate = {
             href: oneLink,
             statusCode: response.status,
             status: response.statusText,
            // data: response.data,
-        }
-       console.log(linkValidate)
+        }; 
+        console.log (linkValidate)
+    }
+      
        
     })
     .catch(error => {  //respuesta de error del servidor
         console.log("invalid")
-    })
-})
+    }
 
-
+       
+    )
 }
 module.exports = {
     validate
-}
-
-       
-    //promise all dentro de la funci{on}
-
+}*/
