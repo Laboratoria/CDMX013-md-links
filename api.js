@@ -1,9 +1,10 @@
 
 const fn = require ('./fn.js');
-const chalk = require ('chalk');
+const axios = require('axios');
 
-const mdLinks = (filePath, opt) => 
- new Promise((resolve, reject) => { 
+
+const mdLinks = (filePath, opt = {validate:true, stats: true}) => 
+ new Promise((resolve) => { 
 
     // convertir la ruta en absoluta
     const isPathAbsolute = fn.isPathAbsolute(filePath)
@@ -30,7 +31,7 @@ const mdLinks = (filePath, opt) =>
     })
    
 
-   const linksArray = [];
+    const linksArray = [];
 
      filesMd.forEach((file) => {
         // leer archivos
@@ -48,14 +49,67 @@ const mdLinks = (filePath, opt) =>
             }) 
         }
         
+
     })
 
+    // validar links
+    if (opt.validate == true && opt.stats == false){
+        let promisesArr =[];
+        linksArray.forEach((link) => {
+            let valLinks = fn.validateLinks(link.href)
+            .then((result) => {
+                 return {
+                    href: link.href,
+                    text: link.text,
+                    file: link.file,
+                    status: result.status,
+                    msg: result.statusText
+                }
+            })
+            .catch(function (error) {
+                if (error.response) {
+                  // The request was made and the server responded with a status code
+                  // that falls out of the range of 2xx
+                  return {
+                    href: link.href,
+                    text: link.text,
+                    file: link.file,
+                    status: error.response.status,
+                    msg: error.response.statusText
+                    }      
+                }else {
+                  // Something happened in setting up the request that triggered an Error
+                  return {
+                    href: link.href,
+                    text: link.text,
+                    file: link.file,
+                    status: error.message,
+                    msg: 'not found'
+                    } 
+                }
+              });
+              promisesArr.push(valLinks)
+            /*.catch((error) => {
+                return {
+                href: link.href,
+                text: link.text,
+                file: link.file,
+                status: 'Not found'+ error,
+                msg: 'fail'
+           }      
+          })*/
+        })
+        return Promise.all(promisesArr)
+        .then((result) => resolve(result));
+        } else if (opt.validate === false && opt.stats == true){
+            console.log(`All: ${linksArray.length}
+            unique: soy yo`)
+        } else if (opt.validate == true && opt.stats == true){
+            console.log(linksArray)
 
-
-
-    resolve(linksArray) 
-
-    reject('nel no hay nada')
+        }else{
+            resolve(linksArray);
+        }
 
     
  });
