@@ -7,12 +7,17 @@ var path = require('path');
 // const pathE = '.C:/Users/ylera/Desktop/Laboratoria/learnyounodeexercises';
    // getting an extension of a path
 function gettingFileExtention(pathE){
-
-    console.log(path.extname(pathE));
-    return path.extname(pathE);
-
+    return new Promise((resolve, reject)=>{
+       //console.log(path.extname(pathE))
+       if(path.extname(pathE)==='.md'){
+        console.log(path.extname(pathE))
+        resolve(path.extname(pathE))
+       }else{
+        reject('Tu archivo es ' + path.extname(TestPath) + ' intenta con alguno que sea .md ')
+       }  
+    })
 }
 
 module.exports = { gettingFileExtention }
 //File test run
-gettingFileExtention(pathE);
+//gettingFileExtention(pathE);

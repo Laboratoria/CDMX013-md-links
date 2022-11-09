@@ -4,18 +4,22 @@ const fs = require('fs'); // this module enables interacting with the file syste
 // const pathE = 'C:/Users/ylera/Desktop/Laboratoria/learnyounodeexercises'; //this is a constat of a  test path (ruta prueba)
 
 function answerFileOrDirectory(pathE){
-
-    let stats = fs.statSync(pathE); // Use statSync() method to store the returned    tru or false
-    if(stats.isFile()){
-         console.log(pathE + '---> IS A FILE '); 
-         console.log('is directory? ' + stats.isDirectory()); // false 
-
-    } else if(fs.statSync(pathE)){
-        console.log(pathE +'---> IS A DIRECTORY' );  
-        console.log('is directory? ' + stats.isDirectory()); // true
-    }
     
-    return stats.isDirectory();   
+    return new Promise((resolve, reject)=>{
+        let stats = fs.statSync(pathE); // Use statSync() method to store the returned    tru or false
+        if(stats.isFile()){
+             console.log(pathE + '---> IS A FILE '); 
+             console.log('3. is it directory? ' + stats.isDirectory()); // false 
+            resolve(stats.isDirectory()) // false
+        } else if(fs.statSync(pathE)){
+            console.log(pathE +'---> IS A DIRECTORY' );  
+            console.log('3. is it directory? ' + stats.isDirectory()); // true
+            reject(stats.isDirectory())// true
+        }
+        
+        // return stats.isDirectory(); 
+    })
+  
 }
 
 module.exports = { answerFileOrDirectory }
