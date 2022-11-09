@@ -20,17 +20,19 @@ mdLinks(inputOfFilePath, options)
        ${chalk.bgRed(' Other commands: ')} ${chalk.yellow('--validate / -- stats / --validate --stats')} `);
 
     } else if(options.validate === false && options.stats === true){
-        
+       let array = res.repeatedLinks;
             console.log(`
-                ${chalk.magenta('► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ')} STATS ${chalk.magenta(' ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄')}
+                ${chalk.magenta('► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ')} STATS ${chalk.magenta(' ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄')}
                                 
                             ${chalk.cyan('Total:')} ${res.total}
                             ${chalk.yellow('Unique:')} ${res.unique}
                             ${chalk.green('Repeated:')} ${res.repeated}
-
-                ${chalk.magenta('○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ')}
             `)
-
+        array.forEach(e => {console.log(`                    ${chalk.gray('> ' + e.href)}`)})  
+                                        
+                console.log(`
+                ${chalk.magenta('○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○')}
+            `)    
     } else if(options.validate === true && options.stats === false){
 
         res.forEach(element => {
@@ -39,16 +41,19 @@ mdLinks(inputOfFilePath, options)
         
     } else if(options.validate === true && options.stats === true){
 
-         console.log(`
-                ${chalk.magenta('► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ')} STATS & VALIDATE ${chalk.magenta(' ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄')}
+            let array = res.brokenLinksArray;
+            console.log(`
+                ${chalk.magenta('► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ► ')} STATS ${chalk.magenta(' ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄ ◄')}
                                 
                             ${chalk.cyan('Total:')} ${res.total}
                             ${chalk.yellow('Unique:')} ${res.unique}
                             ${chalk.red.bold('Broken:')} ${res.broken}
-
-                ${chalk.magenta('○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○')}
             `)
-
+        array.forEach(e => {console.log(`                    ${chalk.gray('> ' + e.href)}`)})  
+                                        
+                console.log(`
+                ${chalk.magenta('○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○ ○')}
+            `)   
     }
     })
 .catch((err) => console.log(`
@@ -58,4 +63,6 @@ mdLinks(inputOfFilePath, options)
 
    ${chalk.magenta('▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄ ▀ ▄')}
  `))
+
+
 

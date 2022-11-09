@@ -18,9 +18,8 @@ const getStats = (link) => {
       repeated.push(order[i]);
       }
     }    
-    let stats = { total: link.length, unique: unique.length, repeated: repeated.length};
-
-   return stats
+    return { total: link.length, unique: unique.length, repeated: repeated.length, repeatedLinks: repeated};
+    
   }
 
   module.exports = { getStats }

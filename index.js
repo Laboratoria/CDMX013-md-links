@@ -2,7 +2,7 @@ const functions = require('./nodeMod');
 const { getLinks } = require('./components/getLinks');
 const { validateLinks } = require('./components/validateLinks');
 const { getStats } = require('./components/getStats');
-const { statsAndValidation } = require('./components/statsAndValidation');
+const { statsWithValidation } = require('./components/statsWithValidation');
 
 const mdLinks = (givenPath, options) => {
 
@@ -29,7 +29,7 @@ const mdLinks = (givenPath, options) => {
                 let descriptions = getLinks(path);
                 let array = descriptions.map(element => validateLinks(element));
                 let allRequests = Promise.all(array);
-                let result = allRequests.then((res) => statsAndValidation(res));
+                let result = allRequests.then((res) => statsWithValidation(res));
                 resolve(result);
 
             } else if(options.validate === false && options.stats === false){

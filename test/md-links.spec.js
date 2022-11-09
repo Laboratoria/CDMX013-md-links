@@ -1,7 +1,6 @@
 const { getStats } = require('../components/getStats');
 const { validateLinks } = require('../components/validateLinks');
 const { mdLinks }  = require('../index.js');
-const { getLinks } = require('../components/getLinks');
 //jest.mock('../components/validateLinks')
 
 describe('getStats', () =>{
@@ -17,7 +16,7 @@ describe('getStats', () =>{
       {href: 'q'},
       {href: 'a'}
     ]
-    expect(getStats(data)).toEqual({total: 4, unique: 3, repeated: 1})
+    expect(getStats(data)).toEqual({total: 4, unique: 3, repeated: 1, repeatedLinks: [{href: 'a'}]})
   })
 });
 
