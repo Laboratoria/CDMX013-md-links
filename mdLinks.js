@@ -5,15 +5,15 @@ const path = require('path');
 
 
 const userPath = process.argv[2];
-console.log(userPath);
+//console.log(userPath);
 
 //const validationLinks = require('./extraerLinks.js')
 //validationLinks (['https://nodejs.org/']);
 
 
 //verificamos si la ruta existe 
-//const extraerPath  =  fs.existsSync;
-//console.log(extraerPath(userPath) + '   verificamos ruta');
+/*const extraerPath  =  fs.existsSync;
+console.log(extraerPath(userPath) + '   verificamos ruta');*/
 
 
 //leemos el archivo y mostramos links
@@ -39,7 +39,6 @@ const extraer = (userPath) => {
 
 
 module.exports = {
-    userPath,
     extraer,
 
 }
