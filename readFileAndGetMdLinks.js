@@ -1,18 +1,27 @@
 // const { validatePath } = require('../validatePath')
-const fs = require('fs');
+const fs = require("fs");
+const path = require("path");
+const { getObjetValidateFalse } = require('./getObjetValidateFalse');
 
 const readFileAndGetMdLinks = (path) => {
-     let result = '';
-     if(fs.existsSync(path)){
-         const data = fs.readFileSync(path, 'utf8');
-         console.log(data);
-     }else{
-        result = `DOES NOT exist: ${path}`;
-         console.log(result);
-     }
-     
- }
- 
- readFiles('./README.md')
- 
- // console.log(process.argv);
+  let fileContent = fs.readFileSync(path, "utf8");
+
+  const linkRegex = /(\[.*\])\((https?)(:\/\/[^\s\)]+)\)/g;
+  let linksMdInFile = fileContent.match(linkRegex);
+
+  //hacer map o filters voy a leer el arreglo de los links y file
+    let hrefLinks = getObjetValidateFalse(linksMdInFile);
+
+ // console.log(linksMdInFile);
+  return linksMdInFile;
+
+  //console.log(fileContent);
+};
+ //readFileAndGetMdLinks("./README.md");
+
+module.exports = {
+  readFileAndGetMdLinks
+  
+};
+
+// console.log(process.argv);

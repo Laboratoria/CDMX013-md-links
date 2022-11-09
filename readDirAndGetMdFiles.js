@@ -17,9 +17,13 @@ const readDirAndGetMdFiles = (entryPath) => {
     // };
 
   });
+   console.log(mdFiles);
   return mdFiles;
 };
-console.log(readDirAndGetMdFiles('./prueba'));
+// readDirAndGetMdFiles('./prueba');
+module.exports = {
+  readDirAndGetMdFiles
+}
 
 
 
