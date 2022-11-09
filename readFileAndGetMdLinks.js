@@ -3,14 +3,14 @@ const fs = require("fs");
 const path = require("path");
 const { getObjetValidateFalse } = require('./getObjetValidateFalse');
 
-const readFileAndGetMdLinks = (path) => {
+const readFileAndGetMdLinks = (path, entryFile) => {
   let fileContent = fs.readFileSync(path, "utf8");
 
   const linkRegex = /(\[.*\])\((https?)(:\/\/[^\s\)]+)\)/g;
   let linksMdInFile = fileContent.match(linkRegex);
 
   //hacer map o filters voy a leer el arreglo de los links y file
-    let hrefLinks = getObjetValidateFalse(linksMdInFile);
+    let hrefLinks = getObjetValidateFalse(linksMdInFile, entryFile);
 
  // console.log(linksMdInFile);
   return linksMdInFile;

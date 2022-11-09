@@ -9,6 +9,7 @@ const { readDirAndGetMdFiles } = require('./readDirAndGetMdFiles');
 const { readFileAndGetMdLinks } = require('./readFileAndGetMdLinks');
 
 const entryFile = process.argv[2];
+//console.log(entryFile)
 
 function mdLinks(entryFile) {
   let absolutePath
@@ -33,11 +34,15 @@ function mdLinks(entryFile) {
     
   } else {
     // es archivo, llamar función que leer el contenido
-    links = readFileAndGetMdLinks(absolutePath);
+    links = readFileAndGetMdLinks(absolutePath, entryFile);
   }
   // console.log(links);
 }
 
 mdLinks(entryFile);
+
+module.exports = {
+  entryFile
+}
 
 
