@@ -6,12 +6,13 @@ var path = require('path');
 // const pathE = '.C:/Users/ylera/Desktop/Laboratoria/learnyounodeexercises/my-first-io.js';
 // const pathE = '.C:/Users/ylera/Desktop/Laboratoria/learnyounodeexercises';
    // getting an extension of a path
-function gettinFileExtention(pathE){
+function gettingFileExtention(pathE){
 
     console.log(path.extname(pathE));
+    return path.extname(pathE);
 
 }
 
-module.exports = { gettinFileExtention }
+module.exports = { gettingFileExtention }
 //File test run
-gettinFileExtention(pathE);
+gettingFileExtention(pathE);
