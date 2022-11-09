@@ -1,17 +1,11 @@
-const path = require('path');
-const folder = require('./readDir');
+const fetch = require('./lib/fetch');
+const parser = require('./lib/parser');
 
 
-const mdLinks = (dir, options) => {
-  //Extension file
-  const extensionFile = path.extname(dir);
-
-  //Join two paths
-  const joinPaths = path.join('/home/Laboratoria/', './test');
-  console.log('Joining paths: ' + joinPaths);
-  
-  //Read directory
-  folder.showDirContent(__dirname);
+module.exports.mdLinks = (dir, option = {validate: false, stats: false}) => {
+  const promise = new Promise((resolve) => {
+    if (option.validate) resolve(fetch.validate(parser.parser(dir)));
+    if (!option.validate) resolve(parser.parser(dir));
+  });
+  return promise;
 };
-
-mdLinks('README.md', '');
