@@ -52,9 +52,12 @@ const mdLinks = (filePath, opt = {validate:true, stats: true}) =>
 
     })
 
+    const uniq = new Set(linksArray).size
+    
+
     // validar links
-    if (opt.validate == true && opt.stats == false){
-        let promisesArr =[];
+    if (opt.validate == true /*&& opt.stats == false*/){
+         let promisesArr =[];
         linksArray.forEach((link) => {
             let valLinks = fn.validateLinks(link.href)
             .then((result) => {
@@ -89,29 +92,28 @@ const mdLinks = (filePath, opt = {validate:true, stats: true}) =>
                 }
               });
               promisesArr.push(valLinks)
-            /*.catch((error) => {
-                return {
-                href: link.href,
-                text: link.text,
-                file: link.file,
-                status: 'Not found'+ error,
-                msg: 'fail'
-           }      
-          })*/
+             
         })
+        /*if(opt.stats == true){
+            console.log(`All: ${linksArray.length}
+            unique: ${uniq}`) 
+          //  console.log("PromiseARR", promisesArr)
+         }*/
         return Promise.all(promisesArr)
+        
         .then((result) => resolve(result));
         } else if (opt.validate === false && opt.stats == true){
             console.log(`All: ${linksArray.length}
-            unique: soy yo`)
-        } else if (opt.validate == true && opt.stats == true){
-            console.log(linksArray)
-
+            unique: ${uniq}`)
+        }else if (opt.validate == true && opt.stats == true){
+            console.log("lobo estas ahi?")
+            console.log(`All: ${linksArray.length}
+            unique: ${uniq}`)
+            // console.log(promisesArr)
         }else{
+            console.log("aqui no va validate", opt.validate, "status", opt.stats)  
             resolve(linksArray);
         }
-
-    
  });
 
 module.exports = {
