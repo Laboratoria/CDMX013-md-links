@@ -58,18 +58,20 @@ const mdLinks = (filePath, opt) =>
     // validar links
    if (opt.validate == true && opt.stats == false){ 
        Promise.all(fn.valArray(linksArray)).then((result) => resolve(result));
-
         
         } else if (opt.validate === false && opt.stats == true){
             console.log(`All: ${linksArray.length}
             unique: ${uniq}`)
         }else if (opt.validate == true && opt.stats == true){
-
-            console.log("lobo estas ahi?")
-            console.log(`All: ${linksArray.length}
+            Promise.all(fn.valArray(linksArray)).then((result) => {
+                const brokenLinks = result.filter((item) => item.msg === 'Not Found').length;
+                resolve (`All: ${linksArray.length}
             unique: ${uniq}
-            broken: 
+            broken: ${brokenLinks}
             `)
+            });
+
+            
             // console.log(promisesArr)
         }else{
             console.log("aqui no va validate", opt.validate, "status", opt.stats)  

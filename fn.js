@@ -68,7 +68,7 @@ const valArray = (arr) =>{
                text: link.text,
                file: link.file,
                status: error.message,
-               msg: 'not found'
+               msg: 'Not Found'
                } 
            }
          });

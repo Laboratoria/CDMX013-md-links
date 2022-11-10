@@ -30,7 +30,7 @@ const axios = require ('axios');
 
 api.mdLinks('./test-files', {
    validate: true,
-    stats: false
+    stats: true
 }).then(console.log);
 
 /*
