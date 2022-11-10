@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('node:path');
+const fileReadme = './README.md';
 const { resolve } = require('path');
 
 const absolutePath = (fileMd) => {
