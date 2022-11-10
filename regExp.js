@@ -7,6 +7,7 @@ const readMe = fs.readFileSync(pathText, 'utf-8');
 
 const regex = /\[(.+)\]\((https?:.+)\)/ig;
 const linksArray = Array.from(readMe.match(regex))
+console.log(linksArray);
 
 
 module.exports = { linksArray }

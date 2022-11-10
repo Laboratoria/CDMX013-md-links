@@ -10,7 +10,7 @@ const absolutePath = (fileMd) => {
             if (path.isAbsolute(fileMd) == false) {
                 const absoPath = resolve(fileMd);
                 return absoPath;
-
+ 
             } else {
                 return fileMd
             }
