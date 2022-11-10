@@ -1,9 +1,10 @@
 
 const fn = require ('./fn.js');
-const chalk = require ('chalk');
+const axios = require('axios');
+
 
 const mdLinks = (filePath, opt) => 
- new Promise((resolve, reject) => { 
+ new Promise((resolve) => { 
 
     // convertir la ruta en absoluta
     const isPathAbsolute = fn.isPathAbsolute(filePath)
@@ -30,7 +31,7 @@ const mdLinks = (filePath, opt) =>
     })
    
 
-   const linksArray = [];
+    const linksArray = [];
 
      filesMd.forEach((file) => {
         // leer archivos
@@ -41,23 +42,41 @@ const mdLinks = (filePath, opt) =>
         if(resultLinks !== null || resultLinks !== 0){
             resultLinks.forEach(url => {
                 linksArray.push({
-                    href: url[2],
-                    text: url[1].slice(0, 50),
-                    file: file
+                    href: url[2], // url encontrada
+                    text: url[1].slice(0, 50), // texto del link
+                    file: file // ruta del archivo donde se encontro el link
                 })
             }) 
         }
         
+
     })
 
-
-
-
-    resolve(linksArray) 
-
-    reject('nel no hay nada')
-
+    const uniq = new Set(linksArray).size
     
+
+    // validar links
+   if (opt.validate == true && opt.stats == false){ 
+       Promise.all(fn.valArray(linksArray)).then((result) => resolve(result));
+        
+        } else if (opt.validate === false && opt.stats == true){
+            console.log(`All: ${linksArray.length}
+            unique: ${uniq}`)
+        }else if (opt.validate == true && opt.stats == true){
+            Promise.all(fn.valArray(linksArray)).then((result) => {
+                const brokenLinks = result.filter((item) => item.msg === 'Not Found').length;
+                resolve (`All: ${linksArray.length}
+            unique: ${uniq}
+            broken: ${brokenLinks}
+            `)
+            });
+
+            
+            // console.log(promisesArr)
+        }else{
+            console.log("aqui no va validate", opt.validate, "status", opt.stats)  
+            resolve(linksArray);
+        }
  });
 
 module.exports = {

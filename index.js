@@ -1,7 +1,6 @@
 const fn = require ('./fn.js');
 const api = require ('./api');
 const axios = require ('axios');
-const chalk = require ('chalk');
 
 
 
@@ -18,7 +17,7 @@ const chalk = require ('chalk');
 //console.log(fn.isFolder('test-files'));
 
 // leer las carpetas
-//console.log(fn.readFolders('test-files'))
+//console.log(fn.readFolders('c'))
 
 // leer archivo
 // console.log(fn.readFile("text.txt"));
@@ -29,7 +28,13 @@ const chalk = require ('chalk');
 // validar links
 
 
+api.mdLinks('./test-files', {
+   validate: true,
+    stats: true
+}).then(console.log);
 
+/*
 api.mdLinks(process.argv[2])
 .then(result => console.log(result))
 .catch(result => console.log(result));
+*/

@@ -37,6 +37,46 @@ const getMdFile = (file) => path.extname(file);
 // validar links 
 const validateLinks = (href) => axios.get(href);
 
+const valArray = (arr) =>{
+    let promisesArr =[];
+   arr.forEach((link) => {
+       let valLinks = validateLinks(link.href)
+       .then((result) => {
+            return {
+               href: link.href,
+               text: link.text,
+               file: link.file,
+               status: result.status,
+               msg: result.statusText
+           }
+       })
+       .catch(function (error) {
+           if (error.response) {
+             // The request was made and the server responded with a status code
+             // that falls out of the range of 2xx
+             return {
+               href: link.href,
+               text: link.text,
+               file: link.file,
+               status: error.response.status,
+               msg: error.response.statusText
+               }      
+           }else {
+             // Something happened in setting up the request that triggered an Error
+             return {
+               href: link.href,
+               text: link.text,
+               file: link.file,
+               status: error.message,
+               msg: 'Not Found'
+               } 
+           }
+         });
+         promisesArr.push(valLinks)
+        
+   })
+   return promisesArr;
+}
 
 module.exports = {
 isPathAbsolute,
@@ -45,5 +85,6 @@ isFolder,
 readFolders,
 readFile,
 getMdFile,
-validateLinks
+validateLinks,
+valArray
 }
