@@ -1,7 +1,7 @@
 const fs = require('fs'); // this module enables interacting with the file system in a way modeled on standard POSIX functions.
 const path = require('path');
 
- const pathE = 'C:/Users/ylera/Desktop/Labo2/CDMX013-md-links/holis.md';
+ const pathE = './holis.md';
  
 function gettingLinks(TestMDFile){
 
@@ -22,14 +22,14 @@ function gettingLinks(TestMDFile){
         } ) 
   })
 
- console.log(newArray);
+ //console.log(newArray);
  return newArray;
 
 }
 
 module.exports = { gettingLinks }
 // File test run
-gettingLinks(pathE);
+//console.log(gettingLinks(pathE));
 
 
 

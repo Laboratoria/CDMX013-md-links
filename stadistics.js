@@ -1,37 +1,11 @@
-const array = [
-  {
-    href: 'https://nodejs.org/',
-    text: 'Node.js',
-    file: 'C:\\Users\\ylera\\Desktop\\Labo2\\CDMX013-md-links\\holis.md',
-    status: 200,
-    ok: 'ok'
-  },
-  {
-    href: 'https://medium.com/laboratoria-developers/recursi%C3%B3n-o-recursividad-ec8f1a359727',
-    text: 'Recursión o Recursividad - Laboratoria Developers',
-    file: 'C:\\Users\\ylera\\Desktop\\Labo2\\CDMX013-md-links\\README.md',
-    status: 200,
-    ok: 'ok'
-  },
-  {
-    href: 'https://www.freecodecamp.org/news/how-to-write-a-javascript-promise-4ed8d44292b8/)',
-    text: 'How to Write a JavaScript Promise - freecodecamp ',
-    file: 'C:\\Users\\ylera\\Desktop\\Labo2\\CDMX013-md-links\\README.md',
-    status: 404,
-    ok: 'fail'
-  },
-  {
-    href: 'https://www.freecodecamp.org/news/how-to-write-a-javascript-promise-4ed8d44292b8/)',
-    text: 'How to Write a JavaScript Promise - freecodecamp ',
-    file: 'C:\\Users\\ylera\\Desktop\\Labo2\\CDMX013-md-links\\README.md',
-    status: 404,
-    ok: 'fail'
-  }
-]
+
+const { gettingLinks } = require('./gettingLinks.js');
+const { validate } = require('./validate.js');
+
 
 //////////////////////////////
-function stadistics(array, options) { //array de objetos y option es un objeto con opciones validate y 
-return new Promise((resolve)=>{
+function stadistics(array, options) { //array de objetos y option es un objeto con opciones validate 
+//return new Promise((resolve)=>{
   let totalLinks = array.length;
   let brokenLinks = 0; // ok =fail 
   const links = array.map(element => element.href);   //console.log('links', links);
@@ -46,13 +20,13 @@ return new Promise((resolve)=>{
         stats.unique= unique;
         stats.broken= brokenLinks;
   }
+
 })
-}
+}else if (!options.validation){
 stats.total= totalLinks;
 stats.unique= unique;
-//console.log(stats);
-resolve (stats);
-});
+}
+return stats;
 }
 
 
@@ -60,4 +34,6 @@ resolve (stats);
 module.exports = { stadistics }
 
 // testArray
-stadistics(array, {validation:true, stats:true}).then(resultado=>console.log(resultado))
+ //stadistics(array, {validation:true}).then(resultado=>console.log(resultado))
+
+//console.log(stadistics(gettingLinks('./holis.md'), {validation:true}));
