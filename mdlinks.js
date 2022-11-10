@@ -2,16 +2,20 @@ const fs = require('fs'); // this module enables interacting with the file syste
 const path = require('path');
 const axios = require('axios');
 const { validate } = require('./validate')
+const { stadistics } = require('./stadistics')
+// const { CLI } = require('./cli')
 
-const pathdeprueba = './holis.mdx';
+const pathdeprueba = './holis.md';
 
-function getMdLinks(TestPath, option) {
+//CLI();
 
-  return new Promise((resolve,reject)=>{
+function getMdLinks(TestPath, option) { //options is an object with two boolean keys: validation and
+
+  return new Promise((resolve, reject) => {
     // 01_a Verify if a file exists in node.js
     if (fs.existsSync(TestPath)) { //01_a a file exists in node.js
       console.log('El archivo EXISTE');
-      // si la ruta no es absoluta conviertela en absoluta ..... etc... -> resolvepath
+      // if the path is relative, become it in absolute one. -> resolvepath
       if (!path.isAbsolute(TestPath)) { // if it's not absolute
         path.resolve(TestPath); // become in absolute
         console.log(path.resolve(TestPath));
@@ -41,22 +45,22 @@ function getMdLinks(TestPath, option) {
               file: path.resolve(TestPath) // Ruta del archivo donde se encontró el link.
             })
           })
-
-          // //[{}]
-          // const linksVerdaderos = getLinks()
           // console.log(newArray); // => [{ href, text, file}]
 
-          if (option.validate === true) {
-            // console.log(validate(newArray));
-            validate(newArray).then((resultado) => {
-              resolve(resultado)
-            });
+          return new Promise((resolve, reject) => {
+            //return validate(links3)
+            if (option.stats === true && option.validate === true) {
+              //console.log('new array',newArray)
+              validate(newArray).then(validatedArray => resolve(stadistics(validatedArray, { validation: true })))
 
-          
-          } else {
-            resolve(newArray)
-            // console.log(newArray);
-          }
+            } else if (option.stats === true && option.validate === false) {
+              validate(newArray).then(validatedArray => resolve(stadistics(validatedArray, { validation: false })))
+            } else if (option.stats === false && option.validate === true) {
+              validate(newArray).then(validatedArray => resolve(validatedArray))
+            } else {
+              resolve(newArray)
+            }
+          })
 
 
 
@@ -75,11 +79,12 @@ function getMdLinks(TestPath, option) {
       reject("el archivo no existe")
     }
   })
+
 }
 
 
 //ejecucion de preuba
-getMdLinks(pathdeprueba, { validate: true }).then(resultado=> console.log('mi resultado >>',resultado)).catch(error=>console.log('error >>',error))
+getMdLinks(pathdeprueba, { validate: true }).then(resultado => console.log('mi resultado >>', resultado)).catch(error => console.log('error >>', error))
 
 module.exports = { validate };
 

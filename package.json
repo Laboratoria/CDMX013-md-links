@@ -210,6 +210,9 @@
   },
   "author": "",
   "license": "ISC",
+  "bin": {
+    "md-links": "./cli.js"
+  },
   "bugs": {
     "url": "https://github.com/ArelyGutierrez/CDMX013-md-links/issues"
   },
