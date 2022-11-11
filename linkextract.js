@@ -2,12 +2,12 @@ const MarkdownIt = require('markdown-it');
 const md = new MarkdownIt();
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
-const axios = require("axios")
+
 // const functionJsDom = jsdom.JSDOM;
 
 const extract = (text) => {
   let result = md.render(text);
-  console.log(result);
+  // console.log(result);
 
   const dom = new JSDOM(result);
   const query = dom.window.document.querySelectorAll("a");
@@ -23,25 +23,41 @@ const extract = (text) => {
       return false
     }
   })
-  console.log(arrayClean);
-
-
-  // arrayLinks.forEach(console.log);
-  // como de los elementos del array sacar el link
+  return arrayClean;
 }
 
 //coomo acceder al atributo href de la etiqueta a
 
-module.exports = {
-  extract
-}
+module.exports = {extract} // se exporta
 
-const validateLink = (link) => {
+// const validateLink = (link) => {
   //peticion http
   //petiucion get
   //valido o no
   // regresar la promeas de ese resultado xq es asincrona
-}
+  // const linkPrueba = 'https://www.youtube.com/watch?v=Lub5qOmY4JQ'
+  // axios.get(linkPrueba)
+  // .then((response) => {
+  //   const linkValidate ={
+  //     href: linkPrueba,
+  //     statusCode: response.status,
+  //     status: response.statusText,
+  //     // data: response.data,
+  //   }
+
+  //   console.log(linkValidate);
+  //   //crear objeto (status mess, status code, responseUrl)
+  // })
+  // .catch((error) => {
+  //   console.log(error);
+  // });
+
+  
+
+
+// validateLink();
+
+
 
 // const validateLinks = (file) =>{
 
@@ -52,3 +68,5 @@ const validateLink = (link) => {
 // })
 
 // }
+
+//iterar links

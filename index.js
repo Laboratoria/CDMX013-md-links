@@ -3,6 +3,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const myPath = './README.md';
 const { extract } = require('./linkextract.js');
+const {validate} = require ('./linksvalidate.js');
+// const { validate } = require('./validate.js');
 
 
 //variable global que almacene la ruta
@@ -23,9 +25,6 @@ const mdlinks = (myPath, options) => {
     if (checkPath.isDirectory()) {
       console.log(TypeError);
     }
-
-
-
     let otherPath = path.extname(myPath);
     console.log(otherPath);
 
@@ -37,8 +36,8 @@ const mdlinks = (myPath, options) => {
       if (err) {
         console.log('error: ', err);
       } else {
-        //extractorLinks(data);
         extract(data);
+        validate (extract(data)).then(console.log)
       }
     });
 
@@ -70,20 +69,6 @@ const mdlinks = (myPath, options) => {
 }
 mdlinks(myPath);
 
-
-
-
-
-// import { readFileSync } from 'fs';
-
-//Windows
-// readFileSync('<directory>');
-// => [Error: EISDIR: illegal operation on a directory, read <directory>]
-
-//  FreeBSD
-// readFileSync('<directory>'); // => <data>
-
-
 // buscar si path es positivo o negativo
 //decidir desde un comienzo si usarás ES Modules, es decir, import/export
 //librería nativa FS (FileSystem) te será de utilidad.
@@ -92,3 +77,10 @@ mdlinks(myPath);
 //paradigma funcional
 //a los nombres de las funciones siempre ponerles verbo
 //arreglos plural (s)
+
+//crear una funcion md likns
+// que acepte 2 parametros (path y validate options)
+//solo se esta resolviendo ruta falta conjuntarvalidate (que es el que valida los links)
+//se tiene que resolver en una promesa, tiene que retornar una promesa la función (return reject)
+//Cada objeto debe tener un link y contanga propiedades
+//ver donde insertar las promesas
