@@ -69,4 +69,3 @@ module.exports = {extract} // se exporta
 
 // }
 
-//iterar links
