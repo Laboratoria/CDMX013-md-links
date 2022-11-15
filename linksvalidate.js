@@ -5,10 +5,20 @@ const validate = (links) => {
     return axios.get(link)
       .then((response => {
         const linkValidate = {
+          //obtener el titulo del enlace / file name (nombre del archivo)
+          //CLI (lista de links)
+          // [title](URL)
+          //CLI modulo distinto
+          //quitar console.log
+          //CLI el usuario entrega un array process.argv
+// ['node', 'index.js', '--validate', '.'] (iterar)
+          // title:
+      
           href: response.config.url,
           statusCode: response.status,
           status: response.statusText,
-
+// expresion regular de los links ampliarla
+// 3 variables para obtener los datos
         }
 //cosume promesas
         return linkValidate
