@@ -30,42 +30,4 @@ const extract = (text) => {
 
 module.exports = {extract} // se exporta
 
-// const validateLink = (link) => {
-  //peticion http
-  //petiucion get
-  //valido o no
-  // regresar la promeas de ese resultado xq es asincrona
-  // const linkPrueba = 'https://www.youtube.com/watch?v=Lub5qOmY4JQ'
-  // axios.get(linkPrueba)
-  // .then((response) => {
-  //   const linkValidate ={
-  //     href: linkPrueba,
-  //     statusCode: response.status,
-  //     status: response.statusText,
-  //     // data: response.data,
-  //   }
-
-  //   console.log(linkValidate);
-  //   //crear objeto (status mess, status code, responseUrl)
-  // })
-  // .catch((error) => {
-  //   console.log(error);
-  // });
-
-  
-
-
-// validateLink();
-
-
-
-// const validateLinks = (file) =>{
-
-// new Promise ((resolve, reject) =>{
-//   fs.readFile(file, (err, data) ()=>{
-
-//   } )
-// })
-
-// }
 
