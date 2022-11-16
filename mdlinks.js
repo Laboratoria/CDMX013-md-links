@@ -65,7 +65,7 @@ function getMdLinks(TestPath, option) { //options is an object with two boolean 
 
 
         } else {
-          // console.log(path.extname(TestPath));
+          
           console.log('Tu archivo es ' + path.extname(TestPath) + ' intenta con alguno que sea .md ');
         }
 
@@ -87,45 +87,3 @@ function getMdLinks(TestPath, option) { //options is an object with two boolean 
 getMdLinks(pathdeprueba, { validate: true }).then(resultado => console.log('mi resultado >>', resultado)).catch(error => console.log('error >>', error))
 
 module.exports = { validate };
-
-/* module.exports = function mdLinks(path, options){
- return new Promise((resolve, reject) => {
-   resolve([
-     {
-       test: '',
-       file: '',
-       href: ''
-     }
-   ])
- })
-} */
-
-
-/////////////////////////////
-// module.exports = function mdLinks(path, options){
-//   return new Promise((resolve, reject) => {
-//     resolve([
-//       {
-//         test: '',
-//         file: '',
-//         href: ''
-//       }
-//     ])
-//   })
-// }
-
-
-
-//FUNCITON QUE ME DEVUELVA UN ARRAY DE LINKS const links =  ["link","link"]
-//links.map()
-
-
-// function x(a){
-//   if(a === 0){
-//     return "hola"
-//   }
-
-//   if(a == 10){
-//     return 20
-//   }
-// }

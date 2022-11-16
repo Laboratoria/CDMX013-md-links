@@ -24,55 +24,27 @@ function validate(arrayToValidate) {
   const newValidateArray = [];
 
   arrayToValidate.forEach((eachObject) => {
+    
     const makingPromiseRequest = axios.get(eachObject.href)  // Hacer una petición 
-      // return makingPromiseRequest
       .then(function (response) {
         // manejar respuesta exitosa
-        // console.log(response.status);
         const validatedObject = { ...eachObject, status: response.status, ok: 'ok' };
-        // console.log(validatedObject);
         return validatedObject;
       })
       .catch(function (error) {
-        //console.log(error.response);  //error.cause
         const validatedObject = { ...eachObject, status: error.response.status, ok: 'fail' };
-        //  console.log(validatedObject);
         return validatedObject;
 
       })
     newValidateArray.push(makingPromiseRequest);
   })
-  //console.log(newValidateArray);
+  
   return Promise.all(newValidateArray);
 }
- //Promise.all(validate(array)).then((result) => console.log(result));
- //validate(array).then((result) => console.log(result)).catch((error) => console.log(error));
+ 
+//validate(array).then((result) => console.log(result)).catch((error) => console.log(error));
 
 module.exports = { validate }
 
-
-
-
-
-
 //validate(array);
-
-
-// function validate(eachObject) {
-//     const makingPromiseRequest = axios.get(eachObject.href);  // Hacer una petición
-//     return makingPromiseRequest
-//         .then(function (response) {
-//             // manejar respuesta exitosa
-//             // console.log(response.status);
-//             const validatedObject = {...eachObject, status: response.status, ok: 'ok'};
-//             // console.log(validatedObject);
-//             return validatedObject;
-//         })
-//         .catch(function (error) {
-//             //console.log(error.response);  //error.cause
-//             const validatedObject = {...eachObject, status: error.response.status, ok: 'fail'};
-//             //  console.log(validatedObject);
-//             return validatedObject;
-//         })
-// }
 

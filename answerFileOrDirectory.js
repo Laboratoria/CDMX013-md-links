@@ -1,11 +1,9 @@
-// // Require the given module 
+
 const fs = require('fs'); // this module enables interacting with the file system in a way modeled on standard POSIX functions.
-// const pathE = './holis.md'; //this is a constat of a  test path (ruta prueba)
- const pathE = 'C:/Users/ylera/Desktop/Laboratoria/learnyounodeexercises'; //this is a constat of a  test path (ruta prueba)
+
 
 function answerFileOrDirectory(pathE){
     
-    // return new Promise((resolve, reject)=>{
         let stats = fs.statSync(pathE); // Use statSync() method to store the returned    tru or false
         if(stats.isFile()){
              //console.log(pathE + '---> IS A FILE '); 
@@ -17,31 +15,10 @@ function answerFileOrDirectory(pathE){
             return (pathE + '  este es un directorio, intentalo con un archivo')  // true
         }
         
-        // return stats.isDirectory(); 
-    // })
-  
 }
 
 module.exports = { answerFileOrDirectory }
+
 //File test run
  //console.log(answerFileOrDirectory(pathE));
 
-
-
-
-
-
-// function answerFileOrDirectory(pathE){
-
-//     let stats = fs.statSync(pathE); // Use statSync() method to store the returned   
-//     if(stats.isFile()){
-//         console.log(pathE + '---> IS A FILE '); 
-//     } else if(fs.statSync(pathE)){
-//         console.log(pathE +'---> IS A DIRECTORY' );   
-//     }
-    
-// }
-
-// module.exports = { answerFileOrDirectory }
-// //File test run
-// answerFileOrDirectory(pathE);

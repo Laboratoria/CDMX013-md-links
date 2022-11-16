@@ -22,45 +22,13 @@ function gettingLinks(TestMDFile){
         } ) 
   })
 
- //console.log(newArray);
  return newArray;
 
 }
 
 module.exports = { gettingLinks }
 // File test run
-//console.log(gettingLinks(pathE));
-
-
-
-
-
-
-
-
-
-
-
-
-// const textFile = fs.readFileSync(pathE, 'utf-8');
-// const regex = /(\[.*\])(\(https?(:\/\/[^\s\)]+)\))/g // / (\[.*\]) (\(https? (:\/\/[^\s\)]+) \))/g
-// const allLinks = textFile.match((regex)); 
-// //  const allTexts = allLinks.match((regexText)); 
-// //  console.log(regex.exec(textFile));
-// const newArray = [];
-  
-//  allLinks.forEach( element => {
-//     const separate = element.split('](');
-//     const text = separate[0].replace('[','');
-//     const url = separate[1].replace(')','');
-   
-//   newArray.push({
-//       href: url, // URL encontrada.
-//       text: text, // Texto que aparecía dentro del link (<a>).
-//       file: path.resolve(pathE) // Ruta del archivo donde se encontró el link.
-//       } ) 
-//  })
-//  console.log(newArray);
+console.log(gettingLinks(pathE));
 
 
 
