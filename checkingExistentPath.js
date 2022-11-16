@@ -1,11 +1,9 @@
 const fs = require('fs'); 
-const pathE = './README.md';
 // const pathE = 'C:/Users/ylera/Desktop/Laboratoria/learnyounodeexercises';
 
 // verify if a file exists in node.js  //done
 function checkingExistentPath(pathE) {
   
-   // return new Promise((resolve, reject)=>{
     if(fs.existsSync(pathE)){
        //console.log((pathE)); //true
       return (pathE);
@@ -13,12 +11,13 @@ function checkingExistentPath(pathE) {
        //console.log(fs.existsSync(pathE)); //false
       return ('El archivo NO existe');
     }
-//});
+
 }
 
 module.exports = { checkingExistentPath }
+
 //File test run
- checkingExistentPath(pathE);
+//  checkingExistentPath(pathE);
 
 
 
