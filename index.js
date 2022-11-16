@@ -36,7 +36,7 @@ if(option.stats === true && option.validate === true){
 
 //ejecucion de preuba
 //getMdLinks(pathdeprueba, { validate: true }).then(resultado=> console.log('mi resultado >>',resultado)).catch(error=>console.log('error >>',error))
-getMdLinks(pathdeprueba, {validate:false, stats: false }).then(res=>console.log(res))
+//getMdLinks(pathdeprueba, {validate:false, stats: false }).then(res=>console.log(res))
 //console.log(checkingExistentPath(pathdeprueba));
 
 module.exports = { getMdLinks };
