@@ -1,35 +1,28 @@
-const axios = require("axios");
 
+//importa axios (traer respuesta http del servidor)
+const axios = require('axios')
+
+// la funcion a la hora que cumple la promesa retorna un objeto (va validar los links)
 const validate = (links) => {
+// promise all recibe un arreglo de promesas y la resuelve para devolvernos un arreglo con objetos (links con propiedades)
+// itera con map en cada link y devuelve un array de objetos con propiedades
   return Promise.all(links.map((link) => {
     return axios.get(link)
-      .then((response => {
+      .then(response => {
         const linkValidate = {
-          //obtener el titulo del enlace / file name (nombre del archivo)
-          //CLI (lista de links)
-          // [title](URL)
-          //CLI modulo distinto
-          //quitar console.log
-          //CLI el usuario entrega un array process.argv
-// ['node', 'index.js', '--validate', '.'] (iterar)
-          // title:
-      
           href: response.config.url,
           statusCode: response.status,
-          status: response.statusText,
-// expresion regular de los links ampliarla
-// 3 variables para obtener los datos
+          status: response.statusText
         }
-//cosume promesas
+        // si se cumple la promesa retorna la respuesta de axios tanto then o catch (el objeto se compone de diferentes propiedades)
         return linkValidate
-        //crear objeto (status mess, status code, responseUrl)
-      }))
+      })
       .catch(error => {
         const linkinvalid = {
           href: link,
           statusCode: error.status,
           statusText: error.message,
-          message: "fail",
+          message: 'fail'
         }
         return linkinvalid
       })
