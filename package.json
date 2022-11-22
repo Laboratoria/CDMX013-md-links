@@ -3,5 +3,18 @@
   "version": "0.1.0",
   "engines": {
     "node": ">=16.x"
+  },
+  "dependencies": {
+    "axios": "^1.1.3",
+    "jsdom": "^20.0.2",
+    "markdown-extract-links": "^1.0.1",
+    "markdown-it": "^13.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.27.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.5.1",
+    "eslint-plugin-promise": "^6.1.1"
   }
 }
