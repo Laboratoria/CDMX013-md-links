@@ -1,36 +1,41 @@
-const fs = require('node:fs');
-const path = require('node:path');
-const pathFile = './README.md'
-const  {extractLink} = require ('./extractlinks.js')
-const  {validate} = require ('./validate.js')
-const mdLinks = (pathFile, options) => {
+const fs = require('node:fs')
+const path = require('node:path')
+const { extractLinks } = require('./extractlinks.js')
+const { validate } = require('./validate.js')
+const paths = process.argv[2]
 
-  if (path.isAbsolute(pathFile) === false) {
-    pathFile = path.resolve(pathFile);
-  }
+const mdlinks = (paths, options) => {
+  const newPromise = new Promise((resolve, reject) => {
+    if (path.isAbsolute(paths) === false) {
+      paths = path.resolve(paths)
 
-  if (fs.existsSync(pathFile)) {
-    let statFile = fs.statSync(pathFile);
+      if (fs.existsSync(paths)) {
+        const statusPath = fs.statSync(paths)
+        const extFile = path.extname(paths)
 
-    if (statFile.isDirectory()) {
-      return (TypeError);
-    }
-
-    let textFile = path.extname(pathFile);
-    //console.log(textFile);
-
-    if (textFile != ".md") {
-      console.log(TypeError);
-    }
-    fs.readFile(pathFile, "utf-8", (err, data) => {
-      if (err) {
-        console.log("error:", err);
+        if (statusPath.isDirectory() || extFile !== '.md') {
+          reject('Please enter a MD file')
+        } else {
+        // eslint-disable-next-line n/handle-callback-err
+          fs.readFile(paths, 'utf-8', (err, data) => {
+            if (options.validate) {
+              resolve(validate(extractLinks(data)))
+            } else {
+              resolve(extractLinks(data))
+            }
+          })
+        }
       } else {
-         extractLink(data); //llamar a validate
+        reject('The File doesn´t exists!')
       }
-    });
-  } else {
-    console.log("The file doesn´t exists");
-  }
+    }
+  })
+
+  return newPromise
 }
-mdLinks(pathFile);
+
+mdlinks(paths, { validate: true }).then((result) => {
+  console.log(result)
+}).catch((err) => {
+  console.error(err)
+})
