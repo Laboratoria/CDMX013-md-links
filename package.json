@@ -3,5 +3,31 @@
   "version": "0.1.0",
   "engines": {
     "node": ">=16.x"
+  },
+  "description": "Librería para leer archivos .md",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": " "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DeliaCerecedo/CDMX013-md-links.git"
+  },
+  "keywords": [
+    "md-links",
+    "validate",
+    "stast"
+  ],
+  "author": "Delia_Díaz <dhdiaz1971@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DeliaCerecedo/CDMX013-md-links/issues"
+  },
+  "homepage": "https://github.com/DeliaCerecedo/CDMX013-md-links#readme",
+  "dependencies": {
+    "axios": "^1.1.3"
   }
 }
