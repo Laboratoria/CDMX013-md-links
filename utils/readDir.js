@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const readDirAndGetMdFiles = (entryPath) => {
+const readDir = (entryPath) => {
   const files = fs.readdirSync(entryPath); //lee los files del dir actual
   let mdFiles = [];
   // const files = fs.readdirSync('./prueba');
@@ -19,8 +19,8 @@ const readDirAndGetMdFiles = (entryPath) => {
      
   });
   
-   //console.log(mdFiles);
+ //  console.log(mdFiles);
   return mdFiles;
 };
-// readDirAndGetMdFiles('./prueba');
-module.exports = { readDirAndGetMdFiles }
+//readDir('../prueba');
+module.exports = { readDir }

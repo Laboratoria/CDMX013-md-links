@@ -3,7 +3,7 @@ const path = require("path");
 
 
 
-const readFileAndGetMdLinks = (path, entryFile) => {
+const readFile = (path, entryFile) => {
   let fileContent = fs.readFileSync(path, "utf8");
 
   const linkRegex = /(\[.*\])\((https?)(:\/\/[^\s\)]+)\)/g;
@@ -18,6 +18,6 @@ const readFileAndGetMdLinks = (path, entryFile) => {
 };
  //readFileAndGetMdLinks("./README.md");
 
-module.exports = { readFileAndGetMdLinks }
+module.exports = { readFile }
 
 // console.log(process.argv);
